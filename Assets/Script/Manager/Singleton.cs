@@ -57,6 +57,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnDestroy()
     {
-        _isAppClose = true;
+        if(typeof(T) != typeof(PopupManager))
+            _isAppClose = true;
     }
 }

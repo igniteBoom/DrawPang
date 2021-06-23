@@ -10,6 +10,7 @@ public class PopupManager : Singleton<PopupManager>
     {
         NONE,
         NICKNAME_POPUP,
+        ABATAR_POPUP,
     }
 
     PopupBase _getRefPopupByType(Popup_Type __createType)
@@ -18,6 +19,7 @@ public class PopupManager : Singleton<PopupManager>
         {
             case Popup_Type.NONE:               return null;
             case Popup_Type.NICKNAME_POPUP:     return _nickNamePopup;
+            case Popup_Type.ABATAR_POPUP:       return _avatarPopup;
         }
         return null;
     }
@@ -26,6 +28,7 @@ public class PopupManager : Singleton<PopupManager>
 
     public GameObject _loadingRotate;
     public PopupBase _nickNamePopup;
+    public PopupBase _avatarPopup;
 
     List<PopupBase> _listPopupBase = new List<PopupBase>();
 

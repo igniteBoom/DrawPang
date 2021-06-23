@@ -18,6 +18,10 @@ public class AvatarPopup : PopupBase
     {
         
     }
+    public void Init()
+    {
+        GetAvatarData();
+    }
     private void GetAvatarData()
     {
         List<int> avatarData = new List<int>();

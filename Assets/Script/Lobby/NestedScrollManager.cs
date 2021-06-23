@@ -193,6 +193,7 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
 
     public void OnClickPlayer()
     {
+        PopupManager.Instance.CreatePopup<AvatarPopup>(PopupManager.Popup_Type.ABATAR_POPUP);
         Debug.Log("Click OnClickPlayer");
     }
 
