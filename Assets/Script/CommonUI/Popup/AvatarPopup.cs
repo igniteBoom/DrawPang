@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class AvatarPopup : PopupBase
 {
@@ -10,6 +11,9 @@ public class AvatarPopup : PopupBase
     public GameObject[] _arrScrollview;
     public TextMeshProUGUI _textExplain;
 
+    public Toggle[] _arrAvatarSkin;
+    public Scrollbar[] _scrollbar;
+    private bool _isCoroutine = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +92,42 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
+        }
+    }
+    public void ClickSelectButtonScrollView()
+    {
+        for (int i = 0; i < _arrAvatar.Length; i++)
+        {
+            if (_arrAvatar[i].isOn == true)
+            {
+                //cat[0], bunny[1], cat[2] 은 따로 배열 세개로 관리하지만
+                //각각 15개씩 있는 스킨은 45개로 한꺼번에 받아서 처리
+                int tmpSkinEndIndex = i * 15 + 15;
+                for (int j = i * 15; j < tmpSkinEndIndex; j++)
+                {
+                    if(_arrAvatarSkin[j].isOn == true)
+                    {
+                        float tmpValue = 1.0f / 14.0f * (float)(j - i * 15);
+                        //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
+                        if (_isCoroutine)
+                        {
+                            _isCoroutine = false;
+                            StopCoroutine(ScrollBarValue(i, tmpValue));
+                        }
+                        StartCoroutine(ScrollBarValue(i, tmpValue));
+                    }
+                }
+            }
+        }
+    }
+
+    IEnumerator ScrollBarValue(int index, float value)
+    {
+        _isCoroutine = true;
+        while (Mathf.Abs(_scrollbar[index].value - value) >= 0.001f)
+        {
+            yield return null;
+            _scrollbar[index].value = Mathf.Lerp(_scrollbar[index].value, value, 0.1f);
         }
     }
     public void UpDateSkinWindow()
