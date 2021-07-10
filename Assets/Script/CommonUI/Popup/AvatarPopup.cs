@@ -8,12 +8,19 @@ using DG.Tweening;
 public class AvatarPopup : PopupBase
 {
     public Toggle[] _arrAvatar;
+    public GameObject[] _arrAvatarOff;
+
     public GameObject[] _arrScrollview;
     public TextMeshProUGUI _textExplain;
 
     public Toggle[] _arrAvatarSkin;
+    public GameObject[] _arrAvatarSkinOff;
+
     public Scrollbar[] _scrollbar;
     private bool _isCoroutine = false;
+
+    private List<int> avatarData = new List<int>();
+    private List<int> avatarSkinData = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -25,21 +32,23 @@ public class AvatarPopup : PopupBase
     {
         
     }
-    public void Init()
-    {
-        GetAvatarData();
-    }
     private void GetAvatarData()
     {
-        List<int> avatarData = new List<int>();
         avatarData = TableManager.Instance.ListAvatar;
+        avatarSkinData = TableManager.Instance.ListSkin;
 
+        /*
+        for (int i = 0; i < avatarData.Count; i++)
+        {
+            Debug.Log("[" + i + "] avatarData : " + avatarData[i]);
+        }*/
         //_arrAvatar[avatarData[0] - 1].isOn = true;
-        UpDateSkinWindow();
+        InitUI();
     }
 
     public void ClosePopup()
     {
+        UpDateData();
         Destroy(this.gameObject);
     }
 
@@ -130,11 +139,21 @@ public class AvatarPopup : PopupBase
             _scrollbar[index].value = Mathf.Lerp(_scrollbar[index].value, value, 0.1f);
         }
     }
-    public void UpDateSkinWindow()
+    public void InitUI()
     {
-        for(int i = 0; i < _arrAvatar.Length; i++)
+        //받은 데이터로 avatar 활성 비활성화
+        OnOffAvatar();
+
+        //받은 데이터로 avatarSkin 활성 비활성화
+        OnOffAvatarSkin();
+
+        //받은 데이터로 avatar toggle 버튼, scroll view 초기화
+        for (int i = 0; i < _arrAvatar.Length; i++)
         {
-            if(_arrAvatar[i].isOn == true)
+            if(i == avatarData[0] - 1) _arrAvatar[i].isOn = true;
+            else _arrAvatar[i].isOn = false;
+
+            if (_arrAvatar[i].isOn == true)
             {
                 for (int j = 0; j < _arrScrollview.Length; j++)
                 {
@@ -147,6 +166,76 @@ public class AvatarPopup : PopupBase
                         _arrScrollview[j].SetActive(false);
                     }
                 }
+            }
+        }
+
+        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        {
+            if (i == avatarSkinData[0] - 1) _arrAvatarSkin[i].isOn = true;
+            else _arrAvatarSkin[i].isOn = false;
+        }
+    }
+    private void OnOffAvatar()
+    {
+        for (int i = 1; i < avatarData.Count; i++)
+        {
+            if(avatarData[i] == 0)
+            {
+                _arrAvatar[i - 1].gameObject.SetActive(false);
+                _arrAvatarOff[i - 1].SetActive(true);
+            }
+            else
+            {
+                _arrAvatar[i - 1].gameObject.SetActive(true);
+                _arrAvatarOff[i - 1].SetActive(false);
+            }
+        }
+    }
+    private void OnOffAvatarSkin()
+    {
+        for (int i = 1; i < avatarSkinData.Count; i++)
+        {
+            if (avatarSkinData[i] == 0)
+            {
+                _arrAvatarSkin[i - 1].gameObject.SetActive(false);
+                _arrAvatarSkinOff[i - 1].SetActive(true);
+            }
+            else
+            {
+                _arrAvatarSkin[i - 1].gameObject.SetActive(true);
+                _arrAvatarSkinOff[i - 1].SetActive(false);
+            }
+        }
+    }
+
+    private void UpDateData()
+    {
+        int tmpScrollViewIndex = 0;
+        int tmpSkinStartIndex = 0;
+
+        for (int i = 0; i < _arrAvatar.Length; i++)
+        {
+            if(_arrAvatar[i].isOn)
+            {
+                TableManager.Instance.ListAvatar[0] = i + 1;
+                TableManager.Instance.UpdateAvatarDataTable();
+            }
+        }
+        for (int i = 0; i < _arrScrollview.Length; i++)
+        {
+            if (_arrScrollview[i].activeSelf)
+            {
+                tmpScrollViewIndex = i;
+                tmpSkinStartIndex = i * 15; // 각각 15개의 스킨 데이터
+            }
+        }
+
+        for(int i = tmpSkinStartIndex; i < tmpSkinStartIndex + 15; i++)
+        {
+            if (_arrAvatarSkin[i].isOn)
+            {
+                TableManager.Instance.ListSkin[0] = i + 1;
+                TableManager.Instance.UpdateSkinDataTable();
             }
         }
     }

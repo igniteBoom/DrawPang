@@ -17,22 +17,22 @@ public class TableManager : Singleton<TableManager>
     public bool isSuccessInit { get { return _isSuccessInit; } }
 
     private List<int> _listAvatar = new List<int>();
-    public List<int> ListAvatar { get { return _listAvatar; } set { _listAvatar = value; } }
+    public List<int> ListAvatar { get { GetItemTable(); return _listAvatar; } set { _listAvatar = value; } }
 
     private List<int> _listSkin = new List<int>();
-    public List<int> ListSkin { get { return _listSkin; } set { _listSkin = value; } }
+    public List<int> ListSkin { get { GetItemTable(); return _listSkin; } set { _listSkin = value; } }
 
     private List<int> _listFace = new List<int>();
-    public List<int> ListFace { get { return _listFace; } set { _listFace = value; } }
+    public List<int> ListFace { get { GetItemTable(); return _listFace; } set { _listFace = value; } }
 
     private List<int> _listHat = new List<int>();
-    public List<int> ListHat { get { return _listHat; } set { _listHat = value; } }
+    public List<int> ListHat { get { GetItemTable(); return _listHat; } set { _listHat = value; } }
 
     private List<int> _listAcc = new List<int>();
-    public List<int> ListAcc { get { return _listAcc; } set { _listAcc = value; } }
+    public List<int> ListAcc { get { GetItemTable(); return _listAcc; } set { _listAcc = value; } }
 
     private List<int> _listWeapon = new List<int>();
-    public List<int> ListWeapon { get { return _listWeapon; } set { _listWeapon = value; } }
+    public List<int> ListWeapon { get { GetItemTable(); return _listWeapon; } set { _listWeapon = value; } }
 
     //1.초기화
     //2.저장하기
@@ -55,9 +55,9 @@ public class TableManager : Singleton<TableManager>
     {
         Param param = new Param();
 
-        string avatar = "01000000";   // cat bunny bear
-        string skin =   "01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-        string face =   "0100000000000000000000000000000000000000000000000000000000";
+        string avatar = "01010000";   // cat bunny bear
+        string skin =   "01010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+        string face =   "0101000000000000000000000000000000000000000000000000000000";
         string hat =    "0000000000000000000000000000000000";
         string acc =    "0000000000000000000000";
         string weapon = "00000000000000000000";
@@ -392,6 +392,28 @@ public class TableManager : Singleton<TableManager>
             ReadItemDataTable(BRO);
         }
         Debug.Log(BRO.GetReturnValue());        
+    }
+
+    private void GetItemTable()
+    {
+        _listAvatar.Clear();
+        _listSkin.Clear();
+        _listFace.Clear();
+        _listHat.Clear();
+        _listAcc.Clear();
+        _listWeapon.Clear();
+
+        BackendReturnObject BRO = Backend.GameData.GetMyData("item", new Where(), 1);
+
+        if (BRO.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            Debug.Log("BRO.GetReturnValuetoJSON()[rows].Count : " + BRO.GetReturnValuetoJSON()["rows"].Count);
+        }
+        else
+        {
+            ReadItemDataTable(BRO);
+        }
+        Debug.Log(BRO.GetReturnValue());
     }
 
     public void UpdateAvatarDataTable()
