@@ -14,6 +14,7 @@ public class AvatarPopup : PopupBase
     public TextMeshProUGUI _textExplain;
 
     public Toggle[] _arrAvatarSkin;
+    public ArrayList _arrListAvatarSkin = new ArrayList();
     public GameObject[] _arrAvatarSkinOff;
 
     public Scrollbar[] _scrollbar;
@@ -25,6 +26,27 @@ public class AvatarPopup : PopupBase
     void Start()
     {
         GetAvatarData();
+
+        Debug.Log("_arrAvatarSkin[i].onValueChanged1 : " + _arrAvatarSkin.Length);
+        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        {
+            if (_arrAvatarSkin[i].gameObject.activeSelf)
+            {
+                Debug.Log("_arrAvatarSkin save[" + i + "]");
+                _arrAvatarSkin[i].onValueChanged.AddListener(changeText);
+            }
+        }
+    }
+
+    public void changeText(bool bOn)
+    {
+        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        {
+            if (_arrAvatarSkin[i].gameObject.activeSelf && _arrAvatarSkin[i].isOn)
+            {
+                Debug.Log("sonny : " + _arrAvatarSkin[i].name);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -49,6 +71,13 @@ public class AvatarPopup : PopupBase
     public void ClosePopup()
     {
         UpDateData();
+        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        {
+            if (_arrAvatarSkin[i].gameObject.activeSelf)
+            {
+                _arrAvatarSkin[i].onValueChanged.RemoveListener(changeText);
+            }
+        }
         Destroy(this.gameObject);
     }
 
