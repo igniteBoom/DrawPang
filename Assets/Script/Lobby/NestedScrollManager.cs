@@ -85,7 +85,7 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
     // Update is called once per frame
     void Update()
     {
-        _player.localPosition = new Vector3(_trContent.localPosition.x + 1450.0f, _player.localPosition.y, _player.localPosition.z);
+        _player.localPosition = new Vector3(_trContent.localPosition.x + 1620.0f, _player.localPosition.y, _player.localPosition.z);
         if (!_isDrag)
         {
             _scrollbar.value = Mathf.Lerp(_scrollbar.value, _targetPanelScrollValue, 0.1f);
@@ -215,7 +215,12 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
     public void OnClickRotation()
     {
         Debug.Log("Press OnPressRotation" + _player.transform.GetChild(0).gameObject.transform.rotation.eulerAngles.y);
-        _player.transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0, _player.transform.GetChild(0).gameObject.transform.rotation.eulerAngles.y + 180f, 0);
+        if(_player.transform.GetChild(0).gameObject.activeSelf == true)
+            _player.transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0, _player.transform.GetChild(0).gameObject.transform.rotation.eulerAngles.y + 180f, 0);
+        else if (_player.transform.GetChild(1).gameObject.activeSelf == true)
+            _player.transform.GetChild(1).gameObject.transform.rotation = Quaternion.Euler(0, _player.transform.GetChild(1).gameObject.transform.rotation.eulerAngles.y + 180f, 0);
+        else
+            _player.transform.GetChild(2).gameObject.transform.rotation = Quaternion.Euler(0, _player.transform.GetChild(2).gameObject.transform.rotation.eulerAngles.y + 180f, 0);
         //_player.transform.GetChild(0).gameObject.transform.localRotation = Quaternion.Euler(0.0f, tmp_Y, 0.0f);
     }
 }
