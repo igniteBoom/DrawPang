@@ -27,24 +27,36 @@ public class AvatarPopup : PopupBase
     {
         GetAvatarData();
 
-        Debug.Log("_arrAvatarSkin[i].onValueChanged1 : " + _arrAvatarSkin.Length);
+        //Debug.Log("_arrAvatarSkin[i].onValueChanged1 : " + _arrAvatarSkin.Length);
         for (int i = 0; i < _arrAvatarSkin.Length; i++)
         {
             if (_arrAvatarSkin[i].gameObject.activeSelf)
             {
-                Debug.Log("_arrAvatarSkin save[" + i + "]");
+                //Debug.Log("_arrAvatarSkin save[" + i + "]");
                 _arrAvatarSkin[i].onValueChanged.AddListener(changeText);
             }
         }
+
+        //선택된 아바타 현재 위치로 이동
+        ClickSelectButtonScrollView();
     }
 
     public void changeText(bool bOn)
     {
-        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        for (int i = 0; i < _arrAvatar.Length; i++)
         {
-            if (_arrAvatarSkin[i].gameObject.activeSelf && _arrAvatarSkin[i].isOn)
+            if (_arrAvatar[i].isOn)
             {
-                Debug.Log("sonny : " + _arrAvatarSkin[i].name);
+                //cat[0], bunny[1], cat[2] 은 따로 배열 세개로 관리하지만
+                //각각 15개씩 있는 스킨은 45개로 한꺼번에 받아서 처리
+                int tmpSkinEndIndex = i * 15 + 15;
+                for (int j = i * 15; j < tmpSkinEndIndex; j++)
+                {
+                    if (_arrAvatarSkin[j].gameObject.activeSelf && _arrAvatarSkin[j].isOn)
+                    {
+                        _textExplain.text = StringManager.Instance.GetString(_arrAvatarSkin[j].name);
+                    }
+                }
             }
         }
     }
@@ -96,6 +108,11 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
+
+            //text update
+            changeText(false);
+            //선택된 아바타 현재 위치로 이동
+            ClickSelectButtonScrollView();
         }
     }
     public void ClickBunny()
@@ -113,6 +130,11 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
+
+            //text update
+            changeText(false);
+            //선택된 아바타 현재 위치로 이동
+            ClickSelectButtonScrollView();
         }
     }
     public void ClickBear()
@@ -130,10 +152,16 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
+
+            //text update
+            changeText(false);
+            //선택된 아바타 현재 위치로 이동
+            ClickSelectButtonScrollView();
         }
     }
     public void ClickSelectButtonScrollView()
     {
+        Debug.Log("실행되나?");
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
             if (_arrAvatar[i].isOn == true)
@@ -203,6 +231,9 @@ public class AvatarPopup : PopupBase
             if (i == avatarSkinData[0] - 1) _arrAvatarSkin[i].isOn = true;
             else _arrAvatarSkin[i].isOn = false;
         }
+
+        //text 초기화
+        changeText(false);
     }
     private void OnOffAvatar()
     {
