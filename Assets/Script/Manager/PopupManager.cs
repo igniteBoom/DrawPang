@@ -11,6 +11,9 @@ public class PopupManager : Singleton<PopupManager>
         NONE,
         NICKNAME_POPUP,
         ABATAR_POPUP,
+        ACC_POPUP,
+        HAT_POPUP,
+        WEAPON_POPUP,
     }
 
     PopupBase _getRefPopupByType(Popup_Type __createType)
@@ -20,6 +23,9 @@ public class PopupManager : Singleton<PopupManager>
             case Popup_Type.NONE:               return null;
             case Popup_Type.NICKNAME_POPUP:     return _nickNamePopup;
             case Popup_Type.ABATAR_POPUP:       return _avatarPopup;
+            case Popup_Type.ACC_POPUP:          return _accPopup;
+            case Popup_Type.HAT_POPUP:          return _hatPopup;
+            case Popup_Type.WEAPON_POPUP:       return _weaponPopup;
         }
         return null;
     }
@@ -29,6 +35,9 @@ public class PopupManager : Singleton<PopupManager>
     public GameObject _loadingRotate;
     public PopupBase _nickNamePopup;
     public PopupBase _avatarPopup;
+    public PopupBase _accPopup;
+    public PopupBase _hatPopup;
+    public PopupBase _weaponPopup;
 
     List<PopupBase> _listPopupBase = new List<PopupBase>();
 
