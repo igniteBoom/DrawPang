@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class HatPopup : PopupBase
+public class HeadPopup : PopupBase
 {
     public Toggle[] _arrAvatar;
     public GameObject[] _arrAvatarOff;
