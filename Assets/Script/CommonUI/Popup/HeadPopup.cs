@@ -7,15 +7,12 @@ using DG.Tweening;
 
 public class HeadPopup : PopupBase
 {
-    public Toggle[] _arrAvatar;
-    public GameObject[] _arrAvatarOff;
-
     public GameObject[] _arrScrollview;
     public TextMeshProUGUI _textExplain;
 
-    public Toggle[] _arrAvatarSkin;
-    public ArrayList _arrListAvatarSkin = new ArrayList();
-    public GameObject[] _arrAvatarSkinOff;
+    public Toggle[] _arrHeadSkin;
+    public ArrayList _arrListHeadSkin = new ArrayList();
+    public GameObject[] _arrHeadSkinOff;
 
     public Scrollbar[] _scrollbar;
     private bool _isCoroutine = false;
@@ -25,15 +22,15 @@ public class HeadPopup : PopupBase
     // Start is called before the first frame update
     void Start()
     {
-        GetAvatarData();
+        //GetAvatarData();
 
-        //Debug.Log("_arrAvatarSkin[i].onValueChanged1 : " + _arrAvatarSkin.Length);
-        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        //Debug.Log("_arrHeadSkin[i].onValueChanged1 : " + _arrHeadSkin.Length);
+        for (int i = 0; i < _arrHeadSkin.Length; i++)
         {
-            if (_arrAvatarSkin[i].gameObject.activeSelf)
+            if (_arrHeadSkin[i].gameObject.activeSelf)
             {
-                //Debug.Log("_arrAvatarSkin save[" + i + "]");
-                _arrAvatarSkin[i].onValueChanged.AddListener(changeText);
+                //Debug.Log("_arrHeadSkin save[" + i + "]");
+                _arrHeadSkin[i].onValueChanged.AddListener(changeText);
             }
         }
 
@@ -43,6 +40,7 @@ public class HeadPopup : PopupBase
 
     public void changeText(bool bOn)
     {
+        /*
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
             if (_arrAvatar[i].isOn)
@@ -52,13 +50,14 @@ public class HeadPopup : PopupBase
                 int tmpSkinEndIndex = i * 15 + 15;
                 for (int j = i * 15; j < tmpSkinEndIndex; j++)
                 {
-                    if (_arrAvatarSkin[j].gameObject.activeSelf && _arrAvatarSkin[j].isOn)
+                    if (_arrHeadSkin[j].gameObject.activeSelf && _arrHeadSkin[j].isOn)
                     {
-                        _textExplain.text = StringManager.Instance.GetString(_arrAvatarSkin[j].name);
+                        _textExplain.text = StringManager.Instance.GetString(_arrHeadSkin[j].name);
                     }
                 }
             }
         }
+        *.
     }
 
     // Update is called once per frame
@@ -83,11 +82,11 @@ public class HeadPopup : PopupBase
     public void ClosePopup()
     {
         UpDateData();
-        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        for (int i = 0; i < _arrHeadSkin.Length; i++)
         {
-            if (_arrAvatarSkin[i].gameObject.activeSelf)
+            if (_arrHeadSkin[i].gameObject.activeSelf)
             {
-                _arrAvatarSkin[i].onValueChanged.RemoveListener(changeText);
+                _arrHeadSkin[i].onValueChanged.RemoveListener(changeText);
             }
         }
         Destroy(this.gameObject);
@@ -95,6 +94,7 @@ public class HeadPopup : PopupBase
 
     public void ClickCat()
     {
+        /*
         if(_arrAvatar[0].isOn)
         {
             for (int i = 0; i < _arrScrollview.Length; i++)
@@ -114,53 +114,12 @@ public class HeadPopup : PopupBase
             //선택된 아바타 현재 위치로 이동
             ClickSelectButtonScrollView();
         }
+        */
     }
-    public void ClickBunny()
-    {
-        if (_arrAvatar[1].isOn)
-        {
-            for(int i = 0; i < _arrScrollview.Length; i++)
-            {
-                if(i == 1)
-                {
-                    _arrScrollview[i].SetActive(true);
-                }
-                else
-                {
-                    _arrScrollview[i].SetActive(false);
-                }
-            }
-
-            //text update
-            changeText(false);
-            //선택된 아바타 현재 위치로 이동
-            ClickSelectButtonScrollView();
-        }
-    }
-    public void ClickBear()
-    {
-        if (_arrAvatar[2].isOn)
-        {
-            for (int i = 0; i < _arrScrollview.Length; i++)
-            {
-                if (i == 2)
-                {
-                    _arrScrollview[i].SetActive(true);
-                }
-                else
-                {
-                    _arrScrollview[i].SetActive(false);
-                }
-            }
-
-            //text update
-            changeText(false);
-            //선택된 아바타 현재 위치로 이동
-            ClickSelectButtonScrollView();
-        }
-    }
+    
     public void ClickSelectButtonScrollView()
     {
+        /*
         Debug.Log("실행되나?");
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
@@ -171,7 +130,7 @@ public class HeadPopup : PopupBase
                 int tmpSkinEndIndex = i * 15 + 15;
                 for (int j = i * 15; j < tmpSkinEndIndex; j++)
                 {
-                    if(_arrAvatarSkin[j].isOn == true)
+                    if(_arrHeadSkin[j].isOn == true)
                     {
                         float tmpValue = 1.0f / 14.0f * (float)(j - i * 15);
                         //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
@@ -184,7 +143,7 @@ public class HeadPopup : PopupBase
                     }
                 }
             }
-        }
+        }*/
     }
 
     IEnumerator ScrollBarValue(int index, float value)
@@ -203,7 +162,7 @@ public class HeadPopup : PopupBase
 
         //받은 데이터로 avatarSkin 활성 비활성화
         OnOffAvatarSkin();
-
+        /*
         //받은 데이터로 avatar toggle 버튼, scroll view 초기화
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
@@ -224,12 +183,12 @@ public class HeadPopup : PopupBase
                     }
                 }
             }
-        }
+        }*/
 
-        for (int i = 0; i < _arrAvatarSkin.Length; i++)
+        for (int i = 0; i < _arrHeadSkin.Length; i++)
         {
-            if (i == avatarSkinData[0] - 1) _arrAvatarSkin[i].isOn = true;
-            else _arrAvatarSkin[i].isOn = false;
+            if (i == avatarSkinData[0] - 1) _arrHeadSkin[i].isOn = true;
+            else _arrHeadSkin[i].isOn = false;
         }
 
         //text 초기화
@@ -238,7 +197,7 @@ public class HeadPopup : PopupBase
     private void OnOffAvatar()
     {
         for (int i = 1; i < avatarData.Count; i++)
-        {
+        {/*
             if(avatarData[i] == 0)
             {
                 _arrAvatar[i - 1].gameObject.SetActive(false);
@@ -248,7 +207,7 @@ public class HeadPopup : PopupBase
             {
                 _arrAvatar[i - 1].gameObject.SetActive(true);
                 _arrAvatarOff[i - 1].SetActive(false);
-            }
+            }*/
         }
     }
     private void OnOffAvatarSkin()
@@ -257,13 +216,13 @@ public class HeadPopup : PopupBase
         {
             if (avatarSkinData[i] == 0)
             {
-                _arrAvatarSkin[i - 1].gameObject.SetActive(false);
-                _arrAvatarSkinOff[i - 1].SetActive(true);
+                _arrHeadSkin[i - 1].gameObject.SetActive(false);
+                _arrHeadSkinOff[i - 1].SetActive(true);
             }
             else
             {
-                _arrAvatarSkin[i - 1].gameObject.SetActive(true);
-                _arrAvatarSkinOff[i - 1].SetActive(false);
+                _arrHeadSkin[i - 1].gameObject.SetActive(true);
+                _arrHeadSkinOff[i - 1].SetActive(false);
             }
         }
     }
@@ -272,7 +231,7 @@ public class HeadPopup : PopupBase
     {
         int tmpScrollViewIndex = 0;
         int tmpSkinStartIndex = 0;
-
+        /*
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
             if(_arrAvatar[i].isOn)
@@ -280,7 +239,7 @@ public class HeadPopup : PopupBase
                 TableManager.Instance.ListAvatar[0] = i + 1;
                 TableManager.Instance.UpdateAvatarDataTable();
             }
-        }
+        }*/
         for (int i = 0; i < _arrScrollview.Length; i++)
         {
             if (_arrScrollview[i].activeSelf)
@@ -292,7 +251,7 @@ public class HeadPopup : PopupBase
 
         for(int i = tmpSkinStartIndex; i < tmpSkinStartIndex + 15; i++)
         {
-            if (_arrAvatarSkin[i].isOn)
+            if (_arrHeadSkin[i].isOn)
             {
                 TableManager.Instance.ListSkin[0] = i + 1;
                 TableManager.Instance.UpdateSkinDataTable();
