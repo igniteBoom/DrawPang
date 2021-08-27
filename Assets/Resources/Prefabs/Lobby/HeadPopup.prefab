@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 183467334}
   - component: {fileID: 183467335}
   m_Layer: 8
-  m_Name: Toggle_Skin07
+  m_Name: Toggle_Head07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 198619465}
   - component: {fileID: 198619464}
   m_Layer: 8
-  m_Name: Scroll View_Cat
+  m_Name: Scroll View_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 286586431}
   - component: {fileID: 286586432}
   m_Layer: 8
-  m_Name: Toggle_Skin11
+  m_Name: Toggle_Head11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,7 +917,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 83721716}
   m_HandleRect: {fileID: 83721715}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.1426146
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1216,7 +1216,7 @@ GameObject:
   - component: {fileID: 558605759}
   - component: {fileID: 558605760}
   m_Layer: 8
-  m_Name: Toggle_Skin10
+  m_Name: Toggle_Head10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1376,7 +1376,7 @@ GameObject:
   - component: {fileID: 625992551}
   - component: {fileID: 625992552}
   m_Layer: 8
-  m_Name: Toggle_Skin08
+  m_Name: Toggle_Head08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1908,7 +1908,7 @@ GameObject:
   - component: {fileID: 863104019}
   - component: {fileID: 863104020}
   m_Layer: 8
-  m_Name: Toggle_Skin04
+  m_Name: Toggle_Head04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2142,7 +2142,7 @@ GameObject:
   - component: {fileID: 914465221}
   - component: {fileID: 914465222}
   m_Layer: 8
-  m_Name: Toggle_Skin09
+  m_Name: Toggle_Head09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3048,7 +3048,7 @@ GameObject:
   - component: {fileID: 1333417011}
   - component: {fileID: 1333417012}
   m_Layer: 8
-  m_Name: Toggle_Skin01
+  m_Name: Toggle_Head01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3132,7 +3132,7 @@ GameObject:
   - component: {fileID: 1338126357}
   - component: {fileID: 1338126358}
   m_Layer: 8
-  m_Name: Toggle_Skin12
+  m_Name: Toggle_Head12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3440,7 +3440,7 @@ GameObject:
   - component: {fileID: 1570475883}
   - component: {fileID: 1570475884}
   m_Layer: 8
-  m_Name: Toggle_Skin02
+  m_Name: Toggle_Head02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3524,7 +3524,7 @@ GameObject:
   - component: {fileID: 1622776986}
   - component: {fileID: 1622776987}
   m_Layer: 8
-  m_Name: Toggle_Skin06
+  m_Name: Toggle_Head06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3866,7 +3866,7 @@ GameObject:
   - component: {fileID: 1788910310}
   - component: {fileID: 1788910311}
   m_Layer: 8
-  m_Name: Toggle_Skin03
+  m_Name: Toggle_Head03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4024,7 +4024,7 @@ GameObject:
   - component: {fileID: 1965467601}
   - component: {fileID: 1965467602}
   m_Layer: 8
-  m_Name: Toggle_Skin13
+  m_Name: Toggle_Head13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4182,7 +4182,7 @@ GameObject:
   - component: {fileID: 2015785547}
   - component: {fileID: 2015785548}
   m_Layer: 8
-  m_Name: Toggle_Skin05
+  m_Name: Toggle_Head05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4356,7 +4356,7 @@ GameObject:
   - component: {fileID: 2063052817}
   - component: {fileID: 2063052816}
   m_Layer: 8
-  m_Name: Content_Cat
+  m_Name: Content_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4391,7 +4391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5050, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 5050, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2063052817
@@ -5924,7 +5924,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8036068627359496808}
+      - m_Target: {fileID: 0}
         m_MethodName: ClosePopup
         m_Mode: 1
         m_Arguments:
@@ -6129,7 +6129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7339094841001157443}
-  - component: {fileID: 8036068627359496808}
+  - component: {fileID: 839754368855205037}
   m_Layer: 8
   m_Name: HeadPopup
   m_TagString: Untagged
@@ -6158,7 +6158,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8036068627359496808
+--- !u!114 &839754368855205037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6167,24 +6167,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6058730583512691697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405ecb0cfcfe4c84499d252680777b70, type: 3}
+  m_Script: {fileID: 11500000, guid: 95b81e2c6a1f542fb8253acc02b0bafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   popupType: 4
-  _arrAvatar:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _arrAvatarOff:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _arrScrollview:
-  - {fileID: 198619462}
-  - {fileID: 0}
-  - {fileID: 0}
+  _Scrollview: {fileID: 198619462}
   _textExplain: {fileID: 551693790}
-  _arrAvatarSkin:
+  _arrHeadSkin:
   - {fileID: 1333417012}
   - {fileID: 1570475884}
   - {fileID: 1788910311}
@@ -6198,39 +6187,7 @@ MonoBehaviour:
   - {fileID: 286586432}
   - {fileID: 1338126358}
   - {fileID: 1965467602}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _arrAvatarSkinOff:
+  _arrHeadSkinOff:
   - {fileID: 2582849181083407022}
   - {fileID: 4097701481704302674}
   - {fileID: 743336486576743621}
@@ -6244,42 +6201,7 @@ MonoBehaviour:
   - {fileID: 8480184963324767096}
   - {fileID: 3225257098603462225}
   - {fileID: 3035922831884199694}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _scrollbar:
-  - {fileID: 498090413}
-  - {fileID: 0}
-  - {fileID: 0}
+  _scrollbar: {fileID: 498090413}
 --- !u!1 &6953913014257430634
 GameObject:
   m_ObjectHideFlags: 0

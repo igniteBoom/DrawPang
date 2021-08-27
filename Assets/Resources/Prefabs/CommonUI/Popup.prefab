@@ -236,6 +236,10 @@ MonoBehaviour:
   _nickNamePopup: {fileID: 1250034131, guid: 31bcc3bf933f64c769efe0e344736675, type: 3}
   _avatarPopup: {fileID: 8036068627359496808, guid: 1b3e7e4b1e8828f489d80abc63c879e6,
     type: 3}
+  _chestPopup: {fileID: 0}
+  _headPopup: {fileID: 839754368855205037, guid: 605ec955737794c43a27ce203f2e139a,
+    type: 3}
+  _weaponPopup: {fileID: 0}
 --- !u!1001 &3508786477124359436
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -199,6 +199,7 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
 
     public void OnClickHat()
     {
+        PopupManager.Instance.CreatePopup<HeadPopup>(PopupManager.Popup_Type.HEAD_POPUP);
         Debug.Log("Click OnClickHat");
     }
 

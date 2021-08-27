@@ -25,11 +25,11 @@ public class TableManager : Singleton<TableManager>
     private List<int> _listFace = new List<int>();
     public List<int> ListFace { get { GetItemTable(); return _listFace; } set { _listFace = value; } }
 
-    private List<int> _listHat = new List<int>();
-    public List<int> ListHat { get { GetItemTable(); return _listHat; } set { _listHat = value; } }
+    private List<int> _listHead = new List<int>();
+    public List<int> ListHead { get { GetItemTable(); return _listHead; } set { _listHead = value; } }
 
-    private List<int> _listAcc = new List<int>();
-    public List<int> ListAcc { get { GetItemTable(); return _listAcc; } set { _listAcc = value; } }
+    private List<int> _listChest = new List<int>();
+    public List<int> ListChest { get { GetItemTable(); return _listChest; } set { _listChest = value; } }
 
     private List<int> _listWeapon = new List<int>();
     public List<int> ListWeapon { get { GetItemTable(); return _listWeapon; } set { _listWeapon = value; } }
@@ -58,15 +58,15 @@ public class TableManager : Singleton<TableManager>
         string avatar = "01010000";   // cat bunny bear
         string skin =   "01010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         string face =   "0101000000000000000000000000000000000000000000000000000000";
-        string hat =    "0000000000000000000000000000000000";
-        string acc =    "0000000000000000000000";
+        string head =   "0000000000000000000000000000";
+        string chest =  "0000000000000000000000000000";
         string weapon = "00000000000000000000";
 
         param.Add("avatar", avatar);
         param.Add("skin", skin);
         param.Add("face", face);
-        param.Add("hat", hat);
-        param.Add("acc", acc);
+        param.Add("head", head);
+        param.Add("chest", chest);
         param.Add("weapon", weapon);
 
         BackendReturnObject BRO = Backend.GameData.Insert("item", param);
@@ -74,7 +74,7 @@ public class TableManager : Singleton<TableManager>
         if (BRO.IsSuccess())
         {
             Debug.Log("indate : " + BRO.GetInDate());
-            InsertItemDataList(avatar, skin, face, hat, acc, weapon);
+            InsertItemDataList(avatar, skin, face, head, chest, weapon);
         }
         else
         {
@@ -99,7 +99,7 @@ public class TableManager : Singleton<TableManager>
         }
     }
 
-    private void InsertItemDataList(string avatar, string skin, string face, string hat, string acc, string weapon)
+    private void InsertItemDataList(string avatar, string skin, string face, string head, string chest, string weapon)
     {
         // 앞에서부터 두자리씩 잘라 List에 추가해준다.
         for (int i = 0; i <= avatar.Length - 2; i += 2)
@@ -120,16 +120,16 @@ public class TableManager : Singleton<TableManager>
             _listFace.Add(Convert.ToInt32(SubsTmp, 16));
         }
 
-        for (int i = 0; i <= hat.Length - 2; i += 2)
+        for (int i = 0; i <= head.Length - 2; i += 2)
         {
-            string SubsTmp = hat.Substring(i, 2);
-            _listHat.Add(Convert.ToInt32(SubsTmp, 16));
+            string SubsTmp = head.Substring(i, 2);
+            _listHead.Add(Convert.ToInt32(SubsTmp, 16));
         }
 
-        for (int i = 0; i <= acc.Length - 2; i += 2)
+        for (int i = 0; i <= chest.Length - 2; i += 2)
         {
-            string SubsTmp = acc.Substring(i, 2);
-            _listAcc.Add(Convert.ToInt32(SubsTmp, 16));
+            string SubsTmp = chest.Substring(i, 2);
+            _listChest.Add(Convert.ToInt32(SubsTmp, 16));
         }
 
         for (int i = 0; i <= weapon.Length - 2; i += 2)
@@ -150,13 +150,13 @@ public class TableManager : Singleton<TableManager>
         {
             Debug.Log("_listFace[" + i + "] : " + _listFace[i]);
         }
-        for (int i = 0; i < _listHat.Count; i++)
+        for (int i = 0; i < _listHead.Count; i++)
         {
-            Debug.Log("_listHat[" + i + "] : " + _listHat[i]);
+            Debug.Log("_listHead[" + i + "] : " + _listHead[i]);
         }
-        for (int i = 0; i < _listAcc.Count; i++)
+        for (int i = 0; i < _listChest.Count; i++)
         {
-            Debug.Log("_listAcc[" + i + "] : " + _listAcc[i]);
+            Debug.Log("_listChest[" + i + "] : " + _listChest[i]);
         }
         for (int i = 0; i < _listWeapon.Count; i++)
         {
@@ -210,8 +210,8 @@ public class TableManager : Singleton<TableManager>
         string avatar = string.Empty;   // cat bunny bear
         string skin = string.Empty;
         string face = string.Empty;
-        string hat = string.Empty;
-        string acc = string.Empty;
+        string head = string.Empty;
+        string chest = string.Empty;
         string weapon = string.Empty;
 
         // 해당 값이 배열로 저장되어 있을 경우는 아래와 같이 키가 존재하는지 확인합니다.
@@ -257,13 +257,13 @@ public class TableManager : Singleton<TableManager>
             }
         }
 
-        if (data.Keys.Contains("hat"))
+        if (data.Keys.Contains("head"))
         {
-            JsonData hatData = data["hat"];
-            if (hatData.Keys.Contains("S"))
+            JsonData headData = data["head"];
+            if (headData.Keys.Contains("S"))
             {
-                hat = hatData[0].ToString();
-                //Debug.Log("hatData[0] : " + hatData[0] + ", hat : " + hat);
+                head = headData[0].ToString();
+                //Debug.Log("headData[0] : " + headData[0] + ", head : " + head);
             }
             else
             {
@@ -271,13 +271,13 @@ public class TableManager : Singleton<TableManager>
             }
         }
 
-        if (data.Keys.Contains("acc"))
+        if (data.Keys.Contains("chest"))
         {
-            JsonData accData = data["acc"];
-            if (accData.Keys.Contains("S"))
+            JsonData chestData = data["chest"];
+            if (chestData.Keys.Contains("S"))
             {
-                acc = accData[0].ToString();
-                //Debug.Log("accData[0] : " + accData[0] + ", acc : " + acc);
+                chest = chestData[0].ToString();
+                //Debug.Log("chestData[0] : " + chestData[0] + ", chest : " + chest);
             }
             else
             {
@@ -299,7 +299,7 @@ public class TableManager : Singleton<TableManager>
             }
         }
 
-        InsertItemDataList(avatar, skin, face, hat, acc, weapon);
+        InsertItemDataList(avatar, skin, face, head, chest, weapon);
     }
 
     void CheckErrorRead(BackendReturnObject BRO)
@@ -399,8 +399,8 @@ public class TableManager : Singleton<TableManager>
         _listAvatar.Clear();
         _listSkin.Clear();
         _listFace.Clear();
-        _listHat.Clear();
-        _listAcc.Clear();
+        _listHead.Clear();
+        _listChest.Clear();
         _listWeapon.Clear();
 
         BackendReturnObject BRO = Backend.GameData.GetMyData("item", new Where(), 1);
@@ -480,16 +480,16 @@ public class TableManager : Singleton<TableManager>
     {
         string tmp2 = string.Empty;
         string result = string.Empty;
-        for (int i = 0; i < _listHat.Count; i++)
+        for (int i = 0; i < _listHead.Count; i++)
         {
-            tmp2 = Convert.ToString(_listHat[i], 16);    // 10진수 data값ㅇ르 16진수로 변환
+            tmp2 = Convert.ToString(_listHead[i], 16);    // 10진수 data값ㅇ르 16진수로 변환
             tmp2 = tmp2.PadLeft(2, '0');                    // 두자리에 맞춰 0을 채워넣음
 
             result += tmp2;
         }
 
         Param param = new Param();
-        param.Add("hat", result);
+        param.Add("head", result);
 
         BackendReturnObject BRO = Backend.GameData.Update("item", new Where(), param);
 
@@ -500,16 +500,16 @@ public class TableManager : Singleton<TableManager>
     {
         string tmp2 = string.Empty;
         string result = string.Empty;
-        for (int i = 0; i < _listAcc.Count; i++)
+        for (int i = 0; i < _listChest.Count; i++)
         {
-            tmp2 = Convert.ToString(_listAcc[i], 16);    // 10진수 data값ㅇ르 16진수로 변환
+            tmp2 = Convert.ToString(_listChest[i], 16);    // 10진수 data값ㅇ르 16진수로 변환
             tmp2 = tmp2.PadLeft(2, '0');                    // 두자리에 맞춰 0을 채워넣음
 
             result += tmp2;
         }
 
         Param param = new Param();
-        param.Add("acc", result);
+        param.Add("chest", result);
 
         BackendReturnObject BRO = Backend.GameData.Update("item", new Where(), param);
 
