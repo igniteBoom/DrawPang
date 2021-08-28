@@ -476,7 +476,7 @@ public class TableManager : Singleton<TableManager>
         CheckErrorUpdate(BRO);
     }
 
-    public void UpdateHatDataTable()
+    public void UpdateHeadDataTable()
     {
         string tmp2 = string.Empty;
         string result = string.Empty;
@@ -496,7 +496,7 @@ public class TableManager : Singleton<TableManager>
         CheckErrorUpdate(BRO);
     }
 
-    public void UpdateAccDataTable()
+    public void UpdateChestDataTable()
     {
         string tmp2 = string.Empty;
         string result = string.Empty;

@@ -64,7 +64,7 @@ public class HeadPopup : PopupBase
         }*/
 
         // ListHead의 첫번째는 유저가 착용한 아이템을 가리킨다.
-        _arrHeadSkin[headData[0] - 1].isOn = true;
+        //_arrHeadSkin[headData[0] - 1].isOn = true;
         InitUI();
     }
 
@@ -88,7 +88,7 @@ public class HeadPopup : PopupBase
             
                     if(_arrHeadSkin[i].isOn == true)
                     {
-                        float tmpValue = 1.0f / 14.0f * i;
+                        float tmpValue = 1.0f / 12.0f * i;
                         //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
                         if (_isCoroutine)
                         {
@@ -153,7 +153,7 @@ public class HeadPopup : PopupBase
             if(_arrHeadSkin[i].isOn)
             {
                 TableManager.Instance.ListHead[0] = i + 1;
-                TableManager.Instance.UpdateAvatarDataTable();
+                TableManager.Instance.UpdateHeadDataTable();
             }
         }
     }
