@@ -197,19 +197,21 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
         Debug.Log("Click OnClickPlayer");
     }
 
-    public void OnClickHat()
+    public void OnClickHead()
     {
         PopupManager.Instance.CreatePopup<HeadPopup>(PopupManager.Popup_Type.HEAD_POPUP);
         Debug.Log("Click OnClickHat");
     }
 
-    public void OnClickAcc()
+    public void OnClickChest()
     {
+        PopupManager.Instance.CreatePopup<ChestPopup>(PopupManager.Popup_Type.CHEST_POPUP);
         Debug.Log("Click OnClickAcc");
     }
 
     public void OnClickWeapon()
     {
+        PopupManager.Instance.CreatePopup<WeaponPopup>(PopupManager.Popup_Type.WEAPON_POPUP);
         Debug.Log("Click OnClickWeapon");
     }
 
