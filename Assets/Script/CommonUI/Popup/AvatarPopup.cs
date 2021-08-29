@@ -161,7 +161,6 @@ public class AvatarPopup : PopupBase
     }
     public void ClickSelectButtonScrollView()
     {
-        Debug.Log("실행되나?");
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
             if (_arrAvatar[i].isOn == true)

@@ -21,7 +21,7 @@ public class HeadPopup : PopupBase
     // Start is called before the first frame update
     void Start()
     {
-        GetAvatarData();
+        GetHeadData();
 
         //Debug.Log("_arrHeadSkin[i].onValueChanged1 : " + _arrHeadSkin.Length);
         for (int i = 0; i < _arrHeadSkin.Length; i++)
@@ -53,7 +53,7 @@ public class HeadPopup : PopupBase
     {
         
     }
-    private void GetAvatarData()
+    private void GetHeadData()
     {
         headData = TableManager.Instance.ListHead;
 
