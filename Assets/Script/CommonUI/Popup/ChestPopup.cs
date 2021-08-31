@@ -87,7 +87,7 @@ public class ChestPopup : PopupBase
             
                     if(_arrChestSkin[i].isOn == true)
                     {
-                        float tmpValue = 1.0f / 12.0f * i;
+                        float tmpValue = 1.0f / (_arrChestSkin.Length - 1) * i;
                         //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
                         if (_isCoroutine)
                         {

@@ -87,7 +87,7 @@ public class WeaponPopup : PopupBase
             
                     if(_arrWeaponSkin[i].isOn == true)
                     {
-                        float tmpValue = 1.0f / 8.0f * i;
+                        float tmpValue = 1.0f / (_arrWeaponSkin.Length - 1) * i;
                         //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
                         if (_isCoroutine)
                         {

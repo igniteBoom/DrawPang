@@ -88,7 +88,7 @@ public class HeadPopup : PopupBase
             
                     if(_arrHeadSkin[i].isOn == true)
                     {
-                        float tmpValue = 1.0f / 12.0f * i;
+                        float tmpValue = 1.0f / (_arrHeadSkin.Length - 1) * i;
                         //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
                         if (_isCoroutine)
                         {

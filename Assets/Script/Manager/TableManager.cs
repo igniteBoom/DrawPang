@@ -58,9 +58,9 @@ public class TableManager : Singleton<TableManager>
         string avatar = "01010000";   // cat bunny bear
         string skin =   "01010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         string face =   "0101000000000000000000000000000000000000000000000000000000";
-        string head =   "0000000000000000000000000000";
-        string chest =  "0000000000000000000000000000";
-        string weapon = "00000000000000000000";
+        string head =   "010100000000000000000000000000";
+        string chest =  "010100000000000000000000000000";
+        string weapon = "0101000000000000000000";
 
         param.Add("avatar", avatar);
         param.Add("skin", skin);
