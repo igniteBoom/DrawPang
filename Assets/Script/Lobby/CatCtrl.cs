@@ -48,7 +48,7 @@ public class CatCtrl : MonoBehaviour
     {
         avatarData = TableManager.Instance.ListAvatar;
         OnOffInvenAvatar(avatarData[0]);
-        Debug.Log("안켜지나?" + this.gameObject.activeSelf);
+        //Debug.Log("안켜지나?" + this.gameObject.activeSelf);
         if(this.gameObject.activeSelf == true)
         {
             avatarSkinData = TableManager.Instance.ListSkin;
@@ -73,12 +73,12 @@ public class CatCtrl : MonoBehaviour
 
     public void SetData()
     {
-        int tmpSkinIndex = (avatarData[0] - 1) == 0 ? avatarSkinData[0] - 1: (avatarSkinData[0] % (avatarData[0] - 1) * 15);
+        int tmpSkinIndex = (avatarData[0] - 1) == 0 ? avatarSkinData[0] - 1: (avatarSkinData[0] % (avatarData[0] - 1) * 15) - 1;
         int tmpFaceIndex = faceData[0] - 1;
         _skinRend.material = _skin[tmpSkinIndex];
         _faceRend.material = _face[tmpFaceIndex];
 
-        Debug.Log("걸려 이게? : " + tmpSkinIndex);
+        //Debug.Log("걸려 이게? : " + tmpSkinIndex);
         SetItem(_head, headData);
         SetItem(_chest, chestData);
         SetItem(_weapon, weaponData);

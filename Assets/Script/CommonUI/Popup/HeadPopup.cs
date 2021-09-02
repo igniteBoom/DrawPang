@@ -78,6 +78,7 @@ public class HeadPopup : PopupBase
                 _arrHeadSkin[i].onValueChanged.RemoveListener(changeText);
             }
         }
+        UpdateInvenPlayer();
         Destroy(this.gameObject);
     }
     
@@ -145,9 +146,7 @@ public class HeadPopup : PopupBase
 
     private void UpDateData()
     {
-        int tmpScrollViewIndex = 0;
-        int tmpSkinStartIndex = 0;
-        
+        //변경된 데이터 서버 저장
         for (int i = 0; i < _arrHeadSkin.Length; i++)
         {
             if(_arrHeadSkin[i].isOn)
@@ -155,7 +154,12 @@ public class HeadPopup : PopupBase
                 TableManager.Instance.ListHead[0] = i + 1;
                 TableManager.Instance.UpdateHeadDataTable();
             }
-        }
+        }         
     }
-    //private void 
+    public void UpdateInvenPlayer()
+    {
+        GameObject tmpNestedScrollManager;
+        tmpNestedScrollManager = GameObject.FindGameObjectWithTag("NestedScrollManager");
+        tmpNestedScrollManager.GetComponent<NestedScrollManager>().UpdateInvenPlayer();
+    }
 }

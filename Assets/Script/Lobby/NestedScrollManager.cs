@@ -13,6 +13,7 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
     public ParticleSystem _psBG;
     public RectTransform[] _btnRect, _btnImageRect;
     public RectTransform _player;
+    public GameObject[] _avatar;
 
     const int PANELSIZE = 3;
     float[] _panelScrollValue = new float[PANELSIZE];
@@ -225,5 +226,12 @@ public class NestedScrollManager : MonoBehaviour, IBeginDragHandler, IDragHandle
         else
             _player.transform.GetChild(2).gameObject.transform.rotation = Quaternion.Euler(0, _player.transform.GetChild(2).gameObject.transform.rotation.eulerAngles.y + 180f, 0);
         //_player.transform.GetChild(0).gameObject.transform.localRotation = Quaternion.Euler(0.0f, tmp_Y, 0.0f);
+    }
+    public void UpdateInvenPlayer()
+    {
+        if (_avatar[0].activeSelf) _avatar[0].GetComponent<CatCtrl>().LoadData();
+        else if (_avatar[1].activeSelf) _avatar[1].GetComponent<BunnyCtrl>().LoadData();
+        else _avatar[2].GetComponent<BearCtrl>().LoadData();
+        //if(this.transform.GetChild(0).gameObject.activeSelf) 
     }
 }

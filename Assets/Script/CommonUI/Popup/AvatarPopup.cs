@@ -90,6 +90,7 @@ public class AvatarPopup : PopupBase
                 _arrAvatarSkin[i].onValueChanged.RemoveListener(changeText);
             }
         }
+        UpdateInvenPlayer();
         Destroy(this.gameObject);
     }
 
@@ -161,17 +162,22 @@ public class AvatarPopup : PopupBase
     }
     public void ClickSelectButtonScrollView()
     {
+        Debug.Log("걸려1");
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
+            Debug.Log("걸려3" + i);
             if (_arrAvatar[i].isOn == true)
             {
+                Debug.Log("걸려4" + i);
                 //cat[0], bunny[1], cat[2] 은 따로 배열 세개로 관리하지만
                 //각각 15개씩 있는 스킨은 45개로 한꺼번에 받아서 처리
                 int tmpSkinEndIndex = i * 15 + 15;
                 for (int j = i * 15; j < tmpSkinEndIndex; j++)
                 {
-                    if(_arrAvatarSkin[j].isOn == true)
+                    Debug.Log("걸려5" + j);
+                    if (_arrAvatarSkin[j].isOn == true)
                     {
+                        Debug.Log("걸려2 : " + j);
                         float tmpValue = 1.0f / 14.0f * (float)(j - i * 15);
                         //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
                         if (_isCoroutine)
@@ -298,5 +304,10 @@ public class AvatarPopup : PopupBase
             }
         }
     }
-    //private void 
+    public void UpdateInvenPlayer()
+    {
+        GameObject tmpNestedScrollManager;
+        tmpNestedScrollManager = GameObject.FindGameObjectWithTag("NestedScrollManager");
+        tmpNestedScrollManager.GetComponent<NestedScrollManager>().UpdateInvenPlayer();
+    }
 }
