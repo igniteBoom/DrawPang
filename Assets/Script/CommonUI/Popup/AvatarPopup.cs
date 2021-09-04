@@ -109,7 +109,7 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
-
+            InitSkinToggle(0);
             //text update
             changeText(false);
             //선택된 아바타 현재 위치로 이동
@@ -131,7 +131,7 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
-
+            InitSkinToggle(1);
             //text update
             changeText(false);
             //선택된 아바타 현재 위치로 이동
@@ -153,7 +153,7 @@ public class AvatarPopup : PopupBase
                     _arrScrollview[i].SetActive(false);
                 }
             }
-
+            InitSkinToggle(2);
             //text update
             changeText(false);
             //선택된 아바타 현재 위치로 이동
@@ -174,7 +174,7 @@ public class AvatarPopup : PopupBase
                 int tmpSkinEndIndex = i * 15 + 15;
                 for (int j = i * 15; j < tmpSkinEndIndex; j++)
                 {
-                    Debug.Log("걸려5" + j);
+                    Debug.Log("걸려5" + j + " on? : " + _arrAvatarSkin[j].isOn);
                     if (_arrAvatarSkin[j].isOn == true)
                     {
                         Debug.Log("걸려2 : " + j);
@@ -210,9 +210,16 @@ public class AvatarPopup : PopupBase
         OnOffAvatarSkin();
 
         //받은 데이터로 avatar toggle 버튼, scroll view 초기화
+        UpdateAvatarToggle();
+
+        //text 초기화
+        changeText(false);
+    }
+    private void UpdateAvatarToggle()
+    {
         for (int i = 0; i < _arrAvatar.Length; i++)
         {
-            if(i == avatarData[0] - 1) _arrAvatar[i].isOn = true;
+            if (i == avatarData[0] - 1) _arrAvatar[i].isOn = true;
             else _arrAvatar[i].isOn = false;
 
             if (_arrAvatar[i].isOn == true)
@@ -231,14 +238,23 @@ public class AvatarPopup : PopupBase
             }
         }
 
+        UpdateSkinToggle();
+    }
+
+    private void UpdateSkinToggle()
+    {        
         for (int i = 0; i < _arrAvatarSkin.Length; i++)
         {
             if (i == avatarSkinData[0] - 1) _arrAvatarSkin[i].isOn = true;
             else _arrAvatarSkin[i].isOn = false;
         }
-
-        //text 초기화
-        changeText(false);
+    }
+    private void InitSkinToggle(int i)
+    {
+        int j = i * 15;
+        _arrAvatarSkin[j].gameObject.SetActive(true);
+        _arrAvatarSkin[j].isOn = true; 
+        _arrAvatarSkinOff[j].SetActive(false);
     }
     private void OnOffAvatar()
     {

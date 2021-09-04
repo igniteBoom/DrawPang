@@ -72,7 +72,7 @@ public class BunnyCtrl : MonoBehaviour
 
     public void SetData()
     {
-        int tmpSkinIndex = (avatarData[0] - 1) == 0 ? avatarSkinData[0] - 1 : (avatarSkinData[0] % (avatarData[0] - 1) * 15) - 1;
+        int tmpSkinIndex = (avatarData[0] - 1) == 0 ? avatarSkinData[0] - 1 : (avatarSkinData[0] % ((avatarData[0] - 1) * 15)) - 1;
         int tmpFaceIndex = faceData[0] - 1;
         _skinRend.material = _skin[tmpSkinIndex];
         _faceRend.material = _face[tmpFaceIndex];
