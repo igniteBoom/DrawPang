@@ -17,7 +17,8 @@ public class TableManager : Singleton<TableManager>
     public bool isSuccessInit { get { return _isSuccessInit; } }
 
     private int _dpCoin;
-    public int DpCoin { get {; return _dpCoin; } set { _dpCoin = value; } }
+    public int DpCoin { get { GetCoinTable(); return _dpCoin; } set { _dpCoin = value; } }
+
     private List<int> _listAvatar = new List<int>();
     public List<int> ListAvatar { get { GetItemTable(); return _listAvatar; } set { _listAvatar = value; } }
 
@@ -108,7 +109,7 @@ public class TableManager : Singleton<TableManager>
 
         int dpCoin = 100;
 
-        param.Add("coin", dpCoin);
+        param.Add("dpcoin", dpCoin);
 
         BackendReturnObject BRO = Backend.GameData.Insert("coin", param);
 
@@ -352,7 +353,7 @@ public class TableManager : Singleton<TableManager>
         if (data.Keys.Contains("dpcoin"))
         {
             JsonData coinData = data["dpcoin"];
-            if (coinData.Keys.Contains("S"))
+            if (coinData.Keys.Contains("N"))
             {
                 dpCoin = int.Parse(coinData[0].ToString());
                 //Debug.Log("avatarData[0] : " + avatarData[0] + ", avatar : " + avatar);
@@ -494,7 +495,22 @@ public class TableManager : Singleton<TableManager>
         }
         Debug.Log(BRO.GetReturnValue());
     }
+    private void GetCoinTable()
+    {
+        _dpCoin = 0;
 
+        BackendReturnObject BRO = Backend.GameData.GetMyData("coin", new Where(), 1);
+
+        if (BRO.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            Debug.Log("BRO.GetReturnValuetoJSON()[rows].Count : " + BRO.GetReturnValuetoJSON()["rows"].Count);
+        }
+        else
+        {
+            ReadDataTable(BRO, GetCoinData);
+        }
+        Debug.Log(BRO.GetReturnValue());
+    }
     public void UpdateAvatarDataTable()
     {
         string tmp2 = string.Empty;
@@ -618,7 +634,7 @@ public class TableManager : Singleton<TableManager>
     public void UpdateCoinDataTable()
     {
         Param param = new Param();
-        param.Add("weapon", _dpCoin);
+        param.Add("dpcoin", _dpCoin);
 
         BackendReturnObject BRO = Backend.GameData.Update("coin", new Where(), param);
 

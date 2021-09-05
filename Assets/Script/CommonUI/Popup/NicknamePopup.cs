@@ -66,7 +66,7 @@ public class NicknamePopup : PopupBase
     {
         Debug.Log("CreateNickname");
         Backend.BMember.CreateNickname(_textNickName.text);
-        GameObject.FindWithTag("Lobby").GetComponent<LobbySceneManager>().UpdateNickName(_textNickName.text);
+        GameObject.FindWithTag("Lobby").GetComponent<LobbySceneManager>().ChangeNickName(_textNickName.text);
         Destroy(this.gameObject);
     }
 }
