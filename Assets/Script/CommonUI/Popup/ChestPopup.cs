@@ -84,19 +84,18 @@ public class ChestPopup : PopupBase
     public void ClickSelectButtonScrollView()
     {
         for (int i = 0; i < _arrChestSkin.Length; i++)
-        {
-            
-                    if(_arrChestSkin[i].isOn == true)
-                    {
-                        float tmpValue = 1.0f / (_arrChestSkin.Length - 1) * i;
-                        //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
-                        if (_isCoroutine)
-                        {
-                            _isCoroutine = false;
-                            StopCoroutine(ScrollBarValue(i, tmpValue));
-                        }
-                        StartCoroutine(ScrollBarValue(i, tmpValue));
-                    }
+        {            
+            if(_arrChestSkin[i].isOn == true)
+            {
+                float tmpValue = 1.0f / (_arrChestSkin.Length - 1) * i;
+                //DOTween.To(() => _scrollbar[i].value, x => _scrollbar[i].value = x, tmpValue, 0.5f);
+                if (_isCoroutine)
+                {
+                    _isCoroutine = false;
+                    StopCoroutine(ScrollBarValue(i, tmpValue));
+                }
+                StartCoroutine(ScrollBarValue(i, tmpValue));
+            }
         }
     }
 
@@ -144,8 +143,7 @@ public class ChestPopup : PopupBase
     }
 
     private void UpDateData()
-    {
-        
+    {        
         for (int i = 0; i < _arrChestSkin.Length; i++)
         {
             if(_arrChestSkin[i].isOn)

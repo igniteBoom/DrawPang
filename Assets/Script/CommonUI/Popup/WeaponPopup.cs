@@ -77,6 +77,7 @@ public class WeaponPopup : PopupBase
                 _arrWeaponSkin[i].onValueChanged.RemoveListener(changeText);
             }
         }
+        UpdateInvenPlayer();
         Destroy(this.gameObject);
     }
     
@@ -154,5 +155,10 @@ public class WeaponPopup : PopupBase
             }
         }
     }
-    //private void 
+    public void UpdateInvenPlayer()
+    {
+        GameObject tmpNestedScrollManager;
+        tmpNestedScrollManager = GameObject.FindGameObjectWithTag("NestedScrollManager");
+        tmpNestedScrollManager.GetComponent<NestedScrollManager>().UpdateInvenPlayer();
+    }
 }
