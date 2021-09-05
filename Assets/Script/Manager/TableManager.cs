@@ -16,6 +16,8 @@ public class TableManager : Singleton<TableManager>
     private bool _isSuccessInit = false;
     public bool isSuccessInit { get { return _isSuccessInit; } }
 
+    private int _dpCoin;
+    public int DpCoin { get {; return _dpCoin; } set { _dpCoin = value; } }
     private List<int> _listAvatar = new List<int>();
     public List<int> ListAvatar { get { GetItemTable(); return _listAvatar; } set { _listAvatar = value; } }
 
@@ -47,6 +49,7 @@ public class TableManager : Singleton<TableManager>
         //2. 테이블이 없으면 새로 생성
         //          있으면 Log 출력.
         IsItemTable();
+        IsCoinTable();
 
         _isSuccessInit = true;
     }
@@ -75,6 +78,44 @@ public class TableManager : Singleton<TableManager>
         {
             Debug.Log("indate : " + BRO.GetInDate());
             InsertItemDataList(avatar, skin, face, head, chest, weapon);
+        }
+        else
+        {
+            switch (BRO.GetStatusCode())
+            {
+                case "404":
+                    Debug.Log("존재하지 않는 tableName인 경우");
+                    break;
+
+                case "412":
+                    Debug.Log("비활성화 된 tableName인 경우");
+                    break;
+
+                case "413":
+                    Debug.Log("하나의 row( column들의 집합 )이 400KB를 넘는 경우");
+                    break;
+
+                default:
+                    Debug.Log("서버 공통 에러 발생: " + BRO.GetMessage());
+                    break;
+            }
+        }
+    }
+
+    private void InsertCoinDataTable()
+    {
+        Param param = new Param();
+
+        int dpCoin = 100;
+
+        param.Add("coin", dpCoin);
+
+        BackendReturnObject BRO = Backend.GameData.Insert("coin", param);
+
+        if (BRO.IsSuccess())
+        {
+            Debug.Log("indate : " + BRO.GetInDate());
+            _dpCoin = dpCoin;
         }
         else
         {
@@ -164,11 +205,11 @@ public class TableManager : Singleton<TableManager>
         }
     }
 
-    public void ReadItemDataTable(BackendReturnObject BRO)
+    public void ReadDataTable(BackendReturnObject BRO, Action<JsonData> _delegateFunc)
     {
         if (BRO.IsSuccess())
         {
-            GetItemContents(BRO.GetReturnValuetoJSON());
+            GetTableContents(BRO.GetReturnValuetoJSON(), _delegateFunc);
         }
         else
         {
@@ -176,7 +217,7 @@ public class TableManager : Singleton<TableManager>
         }
     }
 
-    private void GetItemContents(JsonData returnData)
+    private void GetTableContents(JsonData returnData, Action<JsonData> _delegateFunc)
     {
         if (returnData != null)
         {
@@ -186,9 +227,10 @@ public class TableManager : Singleton<TableManager>
             if (returnData.Keys.Contains("rows"))
             {
                 JsonData rows = returnData["rows"];
+                int j;
                 for (int i = 0; i < rows.Count; i++)
                 {
-                    GetData(rows[i]);
+                    _delegateFunc(rows[i]);
                 }
             }
 
@@ -196,7 +238,7 @@ public class TableManager : Singleton<TableManager>
             else if (returnData.Keys.Contains("row"))
             {
                 JsonData row = returnData["row"];
-                GetData(row[0]);
+                _delegateFunc(row[0]);
             }
         }
         else
@@ -205,7 +247,7 @@ public class TableManager : Singleton<TableManager>
         }
     }
 
-    void GetData(JsonData data)
+    void GetItemData(JsonData data)
     {
         string avatar = string.Empty;   // cat bunny bear
         string skin = string.Empty;
@@ -302,6 +344,27 @@ public class TableManager : Singleton<TableManager>
         InsertItemDataList(avatar, skin, face, head, chest, weapon);
     }
 
+    void GetCoinData(JsonData data)
+    {
+        int dpCoin = 0;
+
+        // 해당 값이 배열로 저장되어 있을 경우는 아래와 같이 키가 존재하는지 확인합니다.
+        if (data.Keys.Contains("dpcoin"))
+        {
+            JsonData coinData = data["dpcoin"];
+            if (coinData.Keys.Contains("S"))
+            {
+                dpCoin = int.Parse(coinData[0].ToString());
+                //Debug.Log("avatarData[0] : " + avatarData[0] + ", avatar : " + avatar);
+            }
+            else
+            {
+                Debug.Log("존재하지 않는 키 입니다.");
+            }
+        }
+        _dpCoin = dpCoin;
+    }
+
     void CheckErrorRead(BackendReturnObject BRO)
     {
         switch (BRO.GetStatusCode())
@@ -389,9 +452,25 @@ public class TableManager : Singleton<TableManager>
         }
         else
         {
-            ReadItemDataTable(BRO);
+            ReadDataTable(BRO, GetItemData);
         }
         Debug.Log(BRO.GetReturnValue());        
+    }
+
+    private void IsCoinTable()
+    {
+        BackendReturnObject BRO = Backend.GameData.GetMyData("coin", new Where(), 1);
+
+        if (BRO.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            //Debug.Log("BRO.GetReturnValuetoJSON()[rows].Count : " + BRO.GetReturnValuetoJSON()["rows"].Count);
+            InsertCoinDataTable();
+        }
+        else
+        {
+            ReadDataTable(BRO, GetCoinData);
+        }
+        Debug.Log(BRO.GetReturnValue());
     }
 
     private void GetItemTable()
@@ -411,7 +490,7 @@ public class TableManager : Singleton<TableManager>
         }
         else
         {
-            ReadItemDataTable(BRO);
+            ReadDataTable(BRO, GetItemData);
         }
         Debug.Log(BRO.GetReturnValue());
     }
@@ -532,6 +611,16 @@ public class TableManager : Singleton<TableManager>
         param.Add("weapon", result);
 
         BackendReturnObject BRO = Backend.GameData.Update("item", new Where(), param);
+
+        CheckErrorUpdate(BRO);
+    }
+
+    public void UpdateCoinDataTable()
+    {
+        Param param = new Param();
+        param.Add("weapon", _dpCoin);
+
+        BackendReturnObject BRO = Backend.GameData.Update("coin", new Where(), param);
 
         CheckErrorUpdate(BRO);
     }
