@@ -15,6 +15,15 @@ public class SoundManager : Singleton<SoundManager>
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
+    public void Init()
+    {
+        GameObject root = GameObject.Find("SoundManager (Singleton)");
+        if (root == null)
+        {
+            Debug.Log("SoundManager null.");
+            return;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

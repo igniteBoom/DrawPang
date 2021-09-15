@@ -16,6 +16,7 @@ public class TitleSceneController : MonoBehaviour
     void Start()
     {
         BackEndManager.Instance.Init();
+        SoundManager.Instance.Init();
 
         _googleLoginButton.onClick.AddListener(delegate { LoginManager.Instance.GPGSLogin(); });
         _facebookLoginButton.onClick.AddListener(delegate { LoginManager.Instance.FacebookSignup(); });
