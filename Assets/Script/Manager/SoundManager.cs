@@ -13,7 +13,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
-    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
     public void Init()
     {
@@ -34,7 +34,13 @@ public class SoundManager : Singleton<SoundManager>
 
         _audioSources[(int)Sound.BGM].loop = true; // bgm 재생기는 무한 반복 재생
 
-        AudioClip audioClip = Resources.Load<AudioClip>("Sounds/BGM/GameBG");
+        AudioClip[] audioClip = Resources.LoadAll<AudioClip>("Sounds/BGM");
+        Debug.Log("audioLength : " + audioClip.Length);
+        for (int i = 0; i < audioClip.Length; i++)
+        {
+            _audioClips.Add(audioClip[i].name, audioClip[i]);
+            Debug.Log("audio : " + audioClip[i].name + " , " + audioClip[i]);
+        }
     }
 
     public void Clear()
