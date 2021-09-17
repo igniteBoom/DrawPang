@@ -13,8 +13,11 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
-    public Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    public List<AudioClip> _audioClipsBGM = new List<AudioClip>();
+    public List<AudioClip> _audioClipsEffect = new List<AudioClip>();
 
+    float _pitchBGM = 1.0f;
+    float _pitchEffect = 1.0f;
     public void Init()
     {
         GameObject root = GameObject.Find("SoundManager (Singleton)");
@@ -34,13 +37,18 @@ public class SoundManager : Singleton<SoundManager>
 
         _audioSources[(int)Sound.BGM].loop = true; // bgm 재생기는 무한 반복 재생
 
-        AudioClip[] audioClip = Resources.LoadAll<AudioClip>("Sounds/BGM");
-        Debug.Log("audioLength : " + audioClip.Length);
-        for (int i = 0; i < audioClip.Length; i++)
+        AudioClip[] tmpBGM = Resources.LoadAll<AudioClip>("Sounds/BGM");
+        AudioClip[] tmpEffect = Resources.LoadAll<AudioClip>("Sounds/Effect");
+        for (int i = 0; i < tmpBGM.Length; i++)
         {
-            _audioClips.Add(audioClip[i].name, audioClip[i]);
-            Debug.Log("audio : " + audioClip[i].name + " , " + audioClip[i]);
+            _audioClipsBGM.Add(tmpBGM[i]);
         }
+        for (int i = 0; i < tmpEffect.Length; i++)
+        {
+            _audioClipsEffect.Add(tmpEffect[i]);
+        }
+
+        AudioClip result = _audioClipsBGM.Find(x => x.name == "");
     }
 
     public void Clear()
@@ -52,16 +60,24 @@ public class SoundManager : Singleton<SoundManager>
             audioSource.Stop();
         }
         // 효과음 Dictionary 비우기
-        _audioClips.Clear();
+        //_audioClipsBGM.Clear();
     }
 
-    AudioClip GetOrAddAudioClip(string path, Sound type = Sound.Effect)
+    AudioClip GetOrAddAudioClip(string filename, Sound type = Sound.Effect)
     {
-        if (path.Contains("Sounds/") == false)
-            path = $"Sounds/{path}"; // 📂Sound 폴더 안에 저장될 수 있도록
-
         AudioClip audioClip = null;
+        if (type == Sound.BGM)
+        {
 
+        }
+        else
+        {
+
+        }
+        //if (path.Contains("Sounds/") == false)
+        //    path = $"Sounds/{path}"; // 📂Sound 폴더 안에 저장될 수 있도록
+
+        /*
         if (type == Sound.BGM) // BGM 배경음악 클립 붙이기
         {
             audioClip = Resources.Load<AudioClip>(path);
@@ -74,13 +90,36 @@ public class SoundManager : Singleton<SoundManager>
                 _audioClips.Add(path, audioClip);
             }
         }
-
+        */
         if (audioClip == null)
-            Debug.Log($"AudioClip Missing ! {path}");
+            Debug.Log($"AudioClip Missing ! {filename}");
 
         return audioClip;
     }
-    
+    public void Play(string fileName, Sound type = Sound.Effect)
+    {
+        AudioClip result = _audioClipsBGM.Find(x => x.name == fileName);
+        if (null == result)
+        {
+            Debug.LogError(fileName + "이란 파일명이 존재하지 않습니다(" + type + ")");
+            return;
+        }
+
+        if (type == Sound.BGM)
+        {
+            AudioSource audioSource = _audioSources[(int)Sound.BGM];
+            if (audioSource.isPlaying)
+                audioSource.Stop();
+
+            audioSource.pitch = _pitchBGM;
+            audioSource.clip = result;
+            audioSource.Play();
+        }
+        else
+        {
+
+        }
+    }
     public void Play(AudioClip audioClip, Sound type = Sound.Effect, float pitch = 1.0f)
     {
         if (audioClip == null)
