@@ -2691,6 +2691,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1135072884}
     m_Modifications:
+    - target: {fileID: 998492847, guid: 215219769c484461b9b7f2d144161456, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998492851, guid: 215219769c484461b9b7f2d144161456, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5111,6 +5115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies: {fileID: 1973538220}
   animator: {fileID: 1803922548}
+  _enemy: {fileID: 3553424777656839180, guid: e2799bbf497536742a38e0317a292372, type: 3}
 --- !u!1 &1155050797
 GameObject:
   m_ObjectHideFlags: 0
@@ -8684,6 +8689,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1135072884}
     m_Modifications:
+    - target: {fileID: 998492847, guid: 215219769c484461b9b7f2d144161456, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998492851, guid: 215219769c484461b9b7f2d144161456, type: 3}
       propertyPath: m_Camera
       value: 
@@ -8748,6 +8757,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test_Whispa
       objectReference: {fileID: 0}
+    - target: {fileID: 3553424777662046468, guid: 215219769c484461b9b7f2d144161456,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f780ead220eca4d428cbbc6cb77d7348, type: 3}
+    - target: {fileID: 3553424777662046468, guid: 215219769c484461b9b7f2d144161456,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1165b44a555c47fe8f8f43f3814f065, type: 2}
     - target: {fileID: 5347226709382829752, guid: 215219769c484461b9b7f2d144161456,
         type: 3}
       propertyPath: _mainCamera

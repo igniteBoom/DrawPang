@@ -31,6 +31,8 @@ public class EnemyBase : MonoBehaviour
 
         StartCoroutine("CheckState");
         StartCoroutine("CheckAction");
+
+        _mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
     }
 
     private void Update()
