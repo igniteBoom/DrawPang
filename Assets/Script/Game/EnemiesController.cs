@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class EnemiesController : MonoBehaviour
 {
-    public Transform _enemies;
-    float position = 100.0f;
-    public Animator animator;
-
     public GameObject _enemy;
     private List<GameObject> _listEnemy = new List<GameObject>();
     private const int _enemyNum = 60;
@@ -17,11 +13,37 @@ public class EnemiesController : MonoBehaviour
         for (int i = 0; i < _enemyNum; i++)
         {
             GameObject tmpEnemy = Instantiate(_enemy, this.transform);
+            tmpEnemy.name = "Enemy[" + i + "]";
             _listEnemy.Add(tmpEnemy);
             _listEnemy[i].gameObject.SetActive(false);
         }
     }
+    public void SetEnemy(int gameLev)
+    {
+        for (int i = 0; i < _enemyNum; i++)
+        {
+            if(_listEnemy[i].gameObject.activeSelf == false)
+            {
+                _listEnemy[i].GetComponent<EnemyBase>().SetEnemyInit(gameLev);
+                return;
+            }
+        }
+    }
 
+    public void KillEnemy()
+    {
+        List<GameObject> tmpEnemy = new List<GameObject>();
+        for (int i = 0; i < _enemyNum; i++)
+        {
+            if (_listEnemy[i].gameObject.activeSelf == true)
+            {
+                tmpEnemy.Add(_listEnemy[i]);
+            }
+        }
+
+        int tmpIndex = Random.Range(0, tmpEnemy.Count);
+        _listEnemy[tmpIndex].gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {        

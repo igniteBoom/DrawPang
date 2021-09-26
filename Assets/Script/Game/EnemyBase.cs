@@ -40,6 +40,11 @@ public class EnemyBase : MonoBehaviour
         Vector3 p = _mainCamera.WorldToScreenPoint(gameObject.transform.localPosition);
         _gestureTransform.anchoredPosition3D = new Vector3(p.x, p.y - 60f);
     }
+
+    public void SetEnemyInit(int gameLev)
+    {
+        this.gameObject.SetActive(true);
+    }
     public void NONE_Enemy()
     {
         _enemyState = ENEMYSTATE.NONE;
