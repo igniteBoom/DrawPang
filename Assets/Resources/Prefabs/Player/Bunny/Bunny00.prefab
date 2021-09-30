@@ -3132,9 +3132,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4939624373739664}
   - component: {fileID: 95237879886335624}
-  - component: {fileID: 5272234048828933238}
   - component: {fileID: 3102408861678177447}
   - component: {fileID: 5471502845051445651}
+  - component: {fileID: 622218291}
   m_Layer: 0
   m_Name: Bunny00
   m_TagString: Untagged
@@ -3178,20 +3178,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &5272234048828933238
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670025426481046}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: a92895061c55042838f24295b8bf1253, type: 3}
 --- !u!54 &3102408861678177447
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3294,6 +3280,19 @@ MonoBehaviour:
   - {fileID: 8951544379497623294}
   _skinRend: {fileID: 137557153652444700}
   _faceRend: {fileID: 137355686966187942}
+--- !u!65 &622218291
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670025426481046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.6, z: 1}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &1672616734543302
 GameObject:
   m_ObjectHideFlags: 0

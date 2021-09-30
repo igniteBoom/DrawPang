@@ -15,15 +15,22 @@ public class EnemyBase : MonoBehaviour
 
     public ENEMYSTATE _enemyState = ENEMYSTATE.NONE;
     public bool _isDie = false;
+    public GestureGroup _gestureGroup;
     private Animator _aniState;
     private Transform _pos;
-    public float _speed = 1f;
+    public float _speed = 10f;
     public float _knockback;
     public float _knockbackinit = 1f; // ~5
     public float _knockbackP = 0.95f;
     public RectTransform _gestureTransform;
     public Camera _mainCamera;
+    private Vector3 _movement;
+    private Rigidbody _rigdbody;
 
+    private void Awake()
+    {
+        _rigdbody = this.GetComponent<Rigidbody>();
+    }
     private void OnEnable()
     {
         _aniState = gameObject.GetComponent<Animator>();
@@ -44,6 +51,11 @@ public class EnemyBase : MonoBehaviour
     public void SetEnemyInit(int gameLev)
     {
         this.gameObject.SetActive(true);
+        if(Random.Range(0,2) == 0)
+            this.transform.localPosition = new Vector3(Random.Range(-20, 20), 0, -30);
+        else this.transform.localPosition = new Vector3(Random.Range(-20, 20), 0, 30);
+        MOVE_Enemy();
+        _gestureGroup.InitGestureGroup();
     }
     public void NONE_Enemy()
     {
@@ -101,7 +113,7 @@ public class EnemyBase : MonoBehaviour
                 case ENEMYSTATE.NONE:
                     break;
                 case ENEMYSTATE.MOVE:
-                    _pos.localPosition = new Vector3(_pos.localPosition.x - _speed / 20, _pos.localPosition.y, _pos.localPosition.z - _speed / 20);
+                    transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0, 0, -6.5f), Time.deltaTime * _speed);
                     break;
                 case ENEMYSTATE.ATTACK:
                     break;
@@ -115,5 +127,20 @@ public class EnemyBase : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.transform.parent.gameObject.name == "Player")
+        {
+            _enemyState = ENEMYSTATE.ATTACK ;
+            Debug.Log("OnCollisionEnter");
+        }
+    }
+
+    public void DrawGesture(string result)
+    {
+        if (_gestureGroup) _gestureGroup.DrawGesture(result);
+        Debug.Log("EnemyBase DrawGesture : " + result);
     }
 }

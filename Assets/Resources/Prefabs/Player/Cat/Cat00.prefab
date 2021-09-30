@@ -2510,8 +2510,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4026166343667048}
   - component: {fileID: 95428080286180888}
-  - component: {fileID: 1372732510473784823}
   - component: {fileID: 7409980426292145015}
+  - component: {fileID: 594996310}
   m_Layer: 0
   m_Name: Cat00
   m_TagString: Untagged
@@ -2555,20 +2555,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &1372732510473784823
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560702597948966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: cd74eb4e7768b4f19b0932bbb4fe539f, type: 3}
 --- !u!54 &7409980426292145015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2585,6 +2571,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &594996310
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560702597948966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.6, z: 1}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &1573602377990142
 GameObject:
   m_ObjectHideFlags: 0

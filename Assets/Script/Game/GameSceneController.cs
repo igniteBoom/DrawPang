@@ -38,7 +38,7 @@ public class GameSceneController : MonoBehaviour
             //Time.timeScale = 5.0f;
         }
 
-        Debug.Log("time : " + _levTime);
+        //Debug.Log("time : " + _levTime);
         if(Input.GetKeyDown(KeyCode.Space))
         {
             _enemiesController.KillEnemy();

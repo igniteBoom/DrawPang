@@ -8,6 +8,7 @@ TagManager:
   - Planeta
   - PopupManager
   - Lobby
+  - EnemiesController
   layers:
   - Default
   - TransparentFX

@@ -3654,9 +3654,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4342492446589712}
   - component: {fileID: 95169093654324718}
-  - component: {fileID: 907134238}
   - component: {fileID: 907134237}
   - component: {fileID: 5381433654176202988}
+  - component: {fileID: 1564709169}
   m_Layer: 0
   m_Name: Bear00
   m_TagString: Untagged
@@ -3700,20 +3700,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &907134238
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954781504214606}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300002, guid: be142abc290784d29b4270c6142c8687, type: 3}
 --- !u!54 &907134237
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3816,6 +3802,19 @@ MonoBehaviour:
   - {fileID: 6347860340279231812}
   _skinRend: {fileID: 137766238983304154}
   _faceRend: {fileID: 137823104094866092}
+--- !u!65 &1564709169
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954781504214606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.6, z: 1}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &1974793544215702
 GameObject:
   m_ObjectHideFlags: 0

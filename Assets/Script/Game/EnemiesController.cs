@@ -42,7 +42,7 @@ public class EnemiesController : MonoBehaviour
         }
 
         int tmpIndex = Random.Range(0, tmpEnemy.Count);
-        _listEnemy[tmpIndex].gameObject.SetActive(false);
+        tmpEnemy[tmpIndex].gameObject.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -50,5 +50,23 @@ public class EnemiesController : MonoBehaviour
         //position -= 0.1f;
         //animator.speed = 1f;
         //_enemies.localPosition = new Vector3(position, _enemies.localPosition.y, position);
+    }
+
+    public void DrawGesture(string result)
+    {
+        Debug.Log("result : " + result);
+        List<GameObject> tmpEnemy = new List<GameObject>();
+        for (int i = 0; i < _enemyNum; i++)
+        {
+            if (_listEnemy[i].gameObject.activeSelf == true)
+            {
+                tmpEnemy.Add(_listEnemy[i]);
+            }
+        }
+
+        for (int i = 0; i < tmpEnemy.Count; i++)
+        {
+            tmpEnemy[i].GetComponent<EnemyBase>().DrawGesture(result);
+        }
     }
 }

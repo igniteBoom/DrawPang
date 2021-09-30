@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1368246850879282746
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368246850879282745}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -87,33 +87,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6a0c6b05f46594fa3771bd8180c3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gestureIndex:
+    currentCryptoKey: 1430788750
+    hiddenValue: 1430788750
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
   _gestureSprite:
   - {fileID: 21300000, guid: ddb4ab19eb52b864484b1caa7e81647e, type: 3}
   - {fileID: 21300000, guid: cdb56e9ac5413ed40b29f1744cd69c50, type: 3}
   - {fileID: 21300000, guid: 63c6a4b32aa295f459df7a7aebbf161a, type: 3}
   - {fileID: 21300000, guid: e2dda3015ad059c47a73a22b9636a97e, type: 3}
   - {fileID: 21300000, guid: df6723a947d4c2740b60340339a15cc2, type: 3}
-  - {fileID: 21300000, guid: df6723a947d4c2740b60340339a15cc2, type: 3}
   - {fileID: 21300000, guid: d054b7874c8da1a4ba37b3f4b4b11b7f, type: 3}
   - {fileID: 21300000, guid: c5a9e1707dbccc6429a1c1e30da977db, type: 3}
   - {fileID: 21300000, guid: c1015b97cd906f341a02ef3d2167eed3, type: 3}
   - {fileID: 21300000, guid: 8c2f72ad40b8b104daa101d4f9ed2277, type: 3}
   - {fileID: 21300000, guid: 0d7d4047e4be5114aa0c17a202a0f875, type: 3}
+  - {fileID: 21300000, guid: 30d42083b053d77409add2dd96995a43, type: 3}
   - {fileID: 21300000, guid: d64a6e10de624ea419b963c7c3b6df5c, type: 3}
   - {fileID: 21300000, guid: a59487fd4d375aa40a5f924ae5747339, type: 3}
-  - {fileID: 21300000, guid: 30d42083b053d77409add2dd96995a43, type: 3}
-  _gestureImage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}

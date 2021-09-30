@@ -1,20 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class GestureGroup : MonoBehaviour
 {
     public List<GameObject> _GestureList = new List<GameObject>();
+    public GameObject _gestureItem;
+    public int _gestureNum;
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    public void InitGestureGroup()
+    {
+        _gestureNum = 20;
+        for (int i = 0; i < _gestureNum; i++)
+        {
+            GameObject tmpEnemy = Instantiate(_gestureItem, this.transform);
+            tmpEnemy.name = "GestureItem[" + i + "]";
+            _GestureList.Add(tmpEnemy);
+            _GestureList[i].gameObject.SetActive(false);
+            _GestureList[i].GetComponent<GestureItem>().InitGestureItem(GestureItem.GESTURETYPE.LEV1);
+        }
+
         int tmpIndex = _GestureList.Count - 2;          // 24 - 2 == 22
-        for(int i = 0; i < _GestureList.Count; i++)
+        for (int i = 0; i < _GestureList.Count; i++)
         {
             _GestureList[i].transform.localPosition = new Vector3(_GestureList[i].GetComponent<RectTransform>().rect.width * (i - tmpIndex)
-                + (i - tmpIndex) * 10, 0,0);            // 0 - 22 * width       23 - 22 * width
-            if(i >= _GestureList.Count - 3)
+                + (i - tmpIndex) * 10, 0, 0);            // 0 - 22 * width       23 - 22 * width
+            if (i >= _GestureList.Count - 3)
             {
                 _GestureList[i].SetActive(true);
             }
@@ -24,7 +41,6 @@ public class GestureGroup : MonoBehaviour
             }
         }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -47,6 +63,12 @@ public class GestureGroup : MonoBehaviour
         }
     }
 
+    public void DrawGesture(string result)
+    {
+        if (_GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name == result) deleteGesture();
+        Debug.Log("GestureGroup DrawGesture : " + result);
+        Debug.Log("_GestureList[_GestureList.Count - 1].name : " + _GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name);
+    }
     private void moveGesture()
     {
         int tmpIndex = _GestureList.Count - 2;
