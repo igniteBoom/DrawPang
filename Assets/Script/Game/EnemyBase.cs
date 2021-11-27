@@ -35,6 +35,7 @@ public class EnemyBase : MonoBehaviour
     {
         _aniState = gameObject.GetComponent<Animator>();
         _pos = transform;
+        _isDie = false;
 
         StartCoroutine("CheckState");
         StartCoroutine("CheckAction");
@@ -46,6 +47,8 @@ public class EnemyBase : MonoBehaviour
     {   
         Vector3 p = _mainCamera.WorldToScreenPoint(gameObject.transform.localPosition);
         _gestureTransform.anchoredPosition3D = new Vector3(p.x, p.y - 60f);
+
+        if (_gestureGroup.EnemyLife <= 0) _enemyState = ENEMYSTATE.DIE;
     }
 
     public void SetEnemyInit(int gameLev)
@@ -66,7 +69,7 @@ public class EnemyBase : MonoBehaviour
     public void MOVE_Enemy()
     {
         _enemyState = ENEMYSTATE.MOVE;
-        _aniState.SetInteger("animation", 1);
+        _aniState.SetInteger("animation", 0);
     }
 
     public void ATTACK_Enemy()
@@ -88,11 +91,23 @@ public class EnemyBase : MonoBehaviour
         _aniState.SetInteger("animation", 4);
     }
 
+    IEnumerator Die_fade()
+    {
+        yield return null;
+    }
     IEnumerator CheckState()
     {
         while(!_isDie)
         {
-            if (_enemyState == ENEMYSTATE.DIE) yield break;
+            if (_enemyState == ENEMYSTATE.DIE)
+            {
+                DIE_Enemy();// yield break;
+                if(_aniState.GetCurrentAnimatorStateInfo(0).IsName("Die4") && _aniState.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
+                {
+                    _isDie = true;
+                    this.gameObject.SetActive(false);
+                }
+            }
             if (_aniState.GetCurrentAnimatorStateInfo(0).IsName("Damage3") && _aniState.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
             {
                 _enemyState = ENEMYSTATE.MOVE;
@@ -138,9 +153,14 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    public void DrawGesture(string result)
+    public bool DrawGesture(string result)
     {
-        if (_gestureGroup) _gestureGroup.DrawGesture(result);
-        Debug.Log("EnemyBase DrawGesture : " + result);
+        bool IsCollect = false;
+        if (_gestureGroup)
+        {
+            _gestureGroup.DrawGesture(result, out IsCollect);
+        }
+        return IsCollect;
+        //Debug.Log("EnemyBase DrawGesture : " + result);
     }
 }

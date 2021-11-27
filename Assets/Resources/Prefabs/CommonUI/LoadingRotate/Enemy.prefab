@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60070159456749b482c1feeec864590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GestureList: []
   _gestureItem: {fileID: 1368246850879282745, guid: f9dcabc751d673f4abf4a8934b9916da,
     type: 3}
   _gestureNum: 20
@@ -420,7 +419,7 @@ BoxCollider:
   m_GameObject: {fileID: 3553424777656839180}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.4, z: 0}

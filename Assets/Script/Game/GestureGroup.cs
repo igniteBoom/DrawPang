@@ -6,7 +6,19 @@ using DG.Tweening;
 
 public class GestureGroup : MonoBehaviour
 {
-    public List<GameObject> _GestureList = new List<GameObject>();
+    private List<GameObject> _GestureList = new List<GameObject>();
+    public int EnemyLife { get { return _GestureList.Count; } }
+    public string CurrentGesture
+    { 
+        get 
+        {
+            if (_GestureList.Count > 0)
+            {
+                return _GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name;
+            }
+            else return null;
+        }
+    }
     public GameObject _gestureItem;
     public int _gestureNum;
     // Start is called before the first frame update
@@ -16,7 +28,7 @@ public class GestureGroup : MonoBehaviour
     }
     public void InitGestureGroup()
     {
-        _gestureNum = 20;
+        _gestureNum = 10;
         for (int i = 0; i < _gestureNum; i++)
         {
             GameObject tmpEnemy = Instantiate(_gestureItem, this.transform);
@@ -30,7 +42,7 @@ public class GestureGroup : MonoBehaviour
         for (int i = 0; i < _GestureList.Count; i++)
         {
             _GestureList[i].transform.localPosition = new Vector3(_GestureList[i].GetComponent<RectTransform>().rect.width * (i - tmpIndex)
-                + (i - tmpIndex) * 10, 0, 0);            // 0 - 22 * width       23 - 22 * width
+                + (i - tmpIndex) * 10, 50, 0);            // 0 - 22 * width       23 - 22 * width
             if (i >= _GestureList.Count - 3)
             {
                 _GestureList[i].SetActive(true);
@@ -44,7 +56,6 @@ public class GestureGroup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void SortGestures(List<GameObject> gestureList)
@@ -63,11 +74,16 @@ public class GestureGroup : MonoBehaviour
         }
     }
 
-    public void DrawGesture(string result)
+    public void DrawGesture(string result, out bool IsCollect)
     {
-        if (_GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name == result) deleteGesture();
-        Debug.Log("GestureGroup DrawGesture : " + result);
-        Debug.Log("_GestureList[_GestureList.Count - 1].name : " + _GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name);
+        if (_GestureList.Count > 0 && _GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name == result)
+        {
+            IsCollect = true;
+            deleteGesture();
+        }
+        else IsCollect = false;
+        //Debug.Log("GestureGroup DrawGesture : " + result);
+        //Debug.Log("_GestureList[_GestureList.Count - 1].name : " + _GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name);
     }
     private void moveGesture()
     {

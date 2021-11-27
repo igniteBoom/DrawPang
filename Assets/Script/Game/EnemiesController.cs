@@ -52,21 +52,30 @@ public class EnemiesController : MonoBehaviour
         //_enemies.localPosition = new Vector3(position, _enemies.localPosition.y, position);
     }
 
-    public void DrawGesture(string result)
+    public void DrawGestureResultCheck(string result, float score)
     {
         Debug.Log("result : " + result);
-        List<GameObject> tmpEnemy = new List<GameObject>();
+        //List<GameObject> tmpEnemy = new List<GameObject>();
+        bool IsCheck = false;
         for (int i = 0; i < _enemyNum; i++)
         {
             if (_listEnemy[i].gameObject.activeSelf == true)
             {
-                tmpEnemy.Add(_listEnemy[i]);
+                //tmpEnemy.Add(_listEnemy[i]);
+                if(_listEnemy[i].GetComponent<EnemyBase>().DrawGesture(result)) IsCheck = true;
             }
         }
 
-        for (int i = 0; i < tmpEnemy.Count; i++)
-        {
-            tmpEnemy[i].GetComponent<EnemyBase>().DrawGesture(result);
-        }
+        if(IsCheck) Debug.Log("score  : " + score);
+
+        //for (int i = 0; i < tmpEnemy.Count; i++)
+        //{
+        //    tmpEnemy[i].GetComponent<EnemyBase>().DrawGesture(result);
+        //}        
+    }
+
+    public void DrawGestureScoreCheck()
+    {
+
     }
 }
