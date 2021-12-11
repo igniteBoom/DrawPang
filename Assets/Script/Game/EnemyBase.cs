@@ -24,6 +24,7 @@ public class EnemyBase : MonoBehaviour
     public float _knockbackP = 0.95f;
     public RectTransform _gestureTransform;
     public Camera _mainCamera;
+    public GameObject[] _onObj;
     private Vector3 _movement;
     private Rigidbody _rigdbody;
 
@@ -53,13 +54,30 @@ public class EnemyBase : MonoBehaviour
 
     public void SetEnemyInit(int gameLev)
     {
+        OnOffEnemyRender(false);
         this.gameObject.SetActive(true);
-        if(Random.Range(0,2) == 0)
+        if (Random.Range(0,2) == 0)
             this.transform.localPosition = new Vector3(Random.Range(-20, 20), 0, -30);
         else this.transform.localPosition = new Vector3(Random.Range(-20, 20), 0, 30);
-        MOVE_Enemy();
         _gestureGroup.InitGestureGroup();
+                
+        StartCoroutine(activeEnemy());
+        MOVE_Enemy();
     }
+    IEnumerator activeEnemy()
+    {
+        yield return new WaitForEndOfFrame();
+        OnOffEnemyRender(true);
+    }
+
+    public void OnOffEnemyRender(bool isOnOff)
+    {
+        foreach(var item in _onObj)
+        {
+            item.SetActive(isOnOff);
+        }
+    }
+
     public void NONE_Enemy()
     {
         _enemyState = ENEMYSTATE.NONE;

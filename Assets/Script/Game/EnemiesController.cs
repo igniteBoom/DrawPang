@@ -44,6 +44,17 @@ public class EnemiesController : MonoBehaviour
         int tmpIndex = Random.Range(0, tmpEnemy.Count);
         tmpEnemy[tmpIndex].gameObject.SetActive(false);
     }
+
+    public void StopEnemy()
+    {
+        for (int i = 0; i < _enemyNum; i++)
+        {
+            if (_listEnemy[i].gameObject.activeSelf == true)
+            {
+                _listEnemy[i].GetComponent<EnemyBase>().NONE_Enemy();
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {        

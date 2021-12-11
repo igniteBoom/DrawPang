@@ -396,6 +396,9 @@ MonoBehaviour:
   _knockbackP: 0.95
   _gestureTransform: {fileID: 1376922338}
   _mainCamera: {fileID: 0}
+  _onObj:
+  - {fileID: 3553424777656839182}
+  - {fileID: 541600328}
 --- !u!64 &404515507
 MeshCollider:
   m_ObjectHideFlags: 0
