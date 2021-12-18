@@ -4,44 +4,86 @@ using UnityEngine;
 using CodeStage.AntiCheat.ObscuredTypes;
 using CodeStage.AntiCheat.Detectors;
 using UnityEngine.UI;
-
+using TMPro;
 public class GameSceneController : MonoBehaviour
 {
     // 위 아래 20개씩 오브젝트풀
     // 몬스터 생성을 어떻게 해야할까?? mesh, materials, 제스쳐 갯수, 제스쳐 난이도
     // Start is called before the first  frame update
-    [SerializeField] 
+    [SerializeField]
     public ObscuredInt _gameLev = 1;
     private bool _cheaterDetected = false;
-    
+
     public EnemiesController _enemiesController;
     public PlayerController _playerController;
+    public TextMeshProUGUI _scoreText;
     public Slider _slider;
 
     [SerializeField]
     private ObscuredBool _isOver = false;
     [SerializeField]
-    private ObscuredFloat _totalTime = 60.0f;
+    private ObscuredFloat _totalTime, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct;
     [SerializeField]
-    private ObscuredFloat _maxLevTime = 20.0f;
-    [SerializeField]
-    private ObscuredFloat _levTime;
-    [SerializeField]
-    private ObscuredFloat _initRespawnTime = 5.0f;
-    [SerializeField]
-    private ObscuredFloat _respawnTime;
-    [SerializeField]
-    private ObscuredFloat _respawnDivisionScale = 1.1f;
+    private ObscuredInt _myScore, _perfectScore, _greatScore, _goodScore;
+
+    public float PerfectPct {
+        get { return _perfectPct; }
+        set { _perfectPct = value; }
+    }
+
+    public float GreatPct {
+        get { return _greatPct; }
+        set { _greatPct = value; }
+    }
+
+    public int MyScore { 
+        get { return _myScore; }
+        set { _myScore = value; _scoreText.text = _myScore.ToString(); }
+    }
+
+    public int PerfectScore {
+        get { return _perfectScore; }
+        set { _perfectScore = value; }
+    }
+
+    public int GreatScore {
+        get { return _greatScore; }
+        set { _greatScore = value; }
+    }
+
+    public int GoodScore {
+        get { return _goodScore; }
+        set { _goodScore = value; }
+    }
+
     void Start()
     {
         ObscuredCheatingDetector.StartDetection(OnCheaterDetected);
-        _slider.value = 1f;
-        _levTime = _maxLevTime;
-        _respawnTime = _initRespawnTime;
+        InitVariable();
     }
     private void OnCheaterDetected()
     {
         _cheaterDetected = true;
+    }
+    public void InitVariable()
+    {
+        _isOver = false;
+        _totalTime = 60.0f;
+        _maxLevTime = 20.0f;
+        _initRespawnTime = 5.0f;
+        _respawnDivisionScale = 1.1f;
+        _perfectPct = 0.95f;
+        _greatPct = 0.9f;
+        _myScore = 0;
+        _scoreText.text = _myScore.ToString();
+        _perfectScore = 100;
+        _greatScore = 80;
+        _goodScore = 50;
+
+        _slider.value = 1f;
+
+        _levTime = _maxLevTime;
+        _respawnTime = _initRespawnTime;
     }
 
     // Update is called once per frame

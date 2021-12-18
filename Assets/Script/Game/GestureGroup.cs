@@ -74,6 +74,11 @@ public class GestureGroup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 제스쳐가 Enemy의 첫번째 제스쳐와 같은지 체크
+    /// </summary>
+    /// <param name="result">sprite name이 같나?</param>
+    /// <param name="IsCollect">그린 제스쳐 결과와 Enemy 제스쳐 비교 bool값</param>
     public void DrawGesture(string result, out bool IsCollect)
     {
         if (_GestureList.Count > 0 && _GestureList[_GestureList.Count - 1].GetComponent<Image>().sprite.name == result)
