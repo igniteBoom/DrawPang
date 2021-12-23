@@ -21,18 +21,24 @@ public class StringManager : Singleton<StringManager>
             CheckCountry();
             JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
             Debug.Log("Backend Chart 받아오기 완료" + rows.Count);
+            Debug.Log("Backend Chart 받아오기 완료" + rows.ToString());
 
             for (int i = 0; i < rows.Count; i++)
             {
                 ChartName = rows[i]["chartName"]["S"].ToString();
-                ChartFileId = rows[i]["selectedChartFileId"]["N"].ToString();
-                Debug.Log("[" + i + "] 차트네임 : " + ChartName + ", 필드아이디 : " + ChartFileId);
+                //Debug.Log("없어 ? : " + rows[i]["selectedChartFileId"]["N"].ToJson().GetType());
+                //if (rows[i]["selectedChartFileId"].ContainsKey("N"))
+                //    ChartFileId = rows[i]["selectedChartFileId"]["N"].ToJson();
+                //else continue;
+                Debug.Log("[" + i + "] 전체차트네임 : " + ChartName + ", 필드아이디 : " + ChartFileId);
 
                 //스트링 차트만 가져오기.
                 if (ChartName == "string")
                 {
+                    ChartFileId = rows[i]["selectedChartFileId"]["N"].ToString();
+                    Debug.Log("[" + i + "] 스트링차트네임 : " + ChartName + ", 필드아이디 : " + ChartFileId);
                     //저장된 stringFileID와 서버 FildID 비교
-                    if (PlayerPrefs.HasKey("StringChartFileID"))
+                    if (PlayerPrefs.HasKey("StringChartFileID") && PlayerPrefs.GetString("StringChartFileID") != string.Empty)
                     {
                         Debug.Log("로컬 FildID : " + PlayerPrefs.GetString("StringChartFileID"));
 
@@ -43,7 +49,7 @@ public class StringManager : Singleton<StringManager>
                             Debug.Log("FildID 교체 : " + PlayerPrefs.GetString("StringChartFileID") + " -> " + ChartFileId);
                             Backend.Chart.DeleteLocalChartData(PlayerPrefs.GetString("StringChartFileID"));
                             PlayerPrefs.SetString("StringChartFileID", ChartFileId);
-                            Backend.Chart.GetOneChartAndSave(ChartFileId);
+                            Backend.Chart.GetOneChartAndSave(ChartFileId, "string");
                             Backend.Chart.GetLocalChartData(ChartFileId);
                         }
                         else
@@ -56,7 +62,7 @@ public class StringManager : Singleton<StringManager>
                     {
                         Debug.Log("저장된 FildID가 없음. 새로운 FildID 등록 : " + ChartFileId);
                         PlayerPrefs.SetString("StringChartFileID", ChartFileId);
-                        Backend.Chart.GetOneChartAndSave(ChartFileId);
+                        Backend.Chart.GetOneChartAndSave(ChartFileId, "string");
                         Backend.Chart.GetLocalChartData(ChartFileId);
                     }
 
@@ -65,7 +71,7 @@ public class StringManager : Singleton<StringManager>
                     //차트가 비어 있으면
                     if (chartJson.ToString() == "Uninitialized JsonData")
                     {
-                        Backend.Chart.GetOneChartAndSave(ChartFileId);
+                        Backend.Chart.GetOneChartAndSave(ChartFileId, "string");
                         if (BRO.IsSuccess())
                         {
                             Debug.Log("새로운 차트 fileID[" + ChartFileId + "]로 저장.");
@@ -92,8 +98,9 @@ public class StringManager : Singleton<StringManager>
 
     public string GetString(string string_name)
     {
+        Debug.Log("ChartFileId가 비었어? : " + Backend.Chart.GetLocalChartData(ChartFileId));
         JsonData chartJson = JsonMapper.ToObject(Backend.Chart.GetLocalChartData(ChartFileId));
-
+        Debug.Log("ChartFileId : " + ChartFileId);
         if (chartJson.ToString() == "Uninitialized JsonData")
         {
             Debug.LogError("String Chart null.");

@@ -38,5 +38,11 @@ public class TitleSceneController : MonoBehaviour
             bLoading = !bLoading;
             //_popupManager.OnOffLoading(bLoading);
         }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log("playerprefs 삭제.");
+            PlayerPrefs.DeleteAll();
+        }
     }
 }
