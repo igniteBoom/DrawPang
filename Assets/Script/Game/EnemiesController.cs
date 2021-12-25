@@ -48,7 +48,7 @@ public class EnemiesController : MonoBehaviour
     {
         for (int i = 0; i < _enemyNum; i++)
         {
-            if(_listEnemy[i].gameObject.activeSelf == false)
+            if(_listEnemy[i].gameObject.activeSelf == false && i == 0)
             {
                 _listEnemy[i].GetComponent<EnemyBase>().SetEnemyInit(gameLev);
                 return;

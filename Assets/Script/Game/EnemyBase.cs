@@ -16,26 +16,28 @@ public class EnemyBase : MonoBehaviour
     public ENEMYSTATE _enemyState = ENEMYSTATE.NONE;
     public bool _isDie = false;
     public GestureGroup _gestureGroup;
-    private Animator _aniState;
+    public Animator _aniState;
     private Transform _pos;
-    public float _speed = 10f;
+    public float _speed = 0.01f;
     public float _knockback;
     public float _knockbackinit = 1f; // ~5
     public float _knockbackP = 0.95f;
     public RectTransform _gestureTransform;
+    public RectTransform _gestureNumberTransform;
     public Camera _mainCamera;
     public GameObject[] _onObj;
+    public bool _isRespawnDirUp;
     private Vector3 _movement;
     private Rigidbody _rigdbody;
 
     private void Awake()
     {
-        _rigdbody = this.GetComponent<Rigidbody>();
+        _rigdbody = _onObj[0].GetComponent<Rigidbody>();
     }
     private void OnEnable()
     {
-        _aniState = gameObject.GetComponent<Animator>();
-        _pos = transform;
+        //_aniState = _onObj[0].gameObject.GetComponent<Animator>();
+        _pos = _onObj[0].transform;
         _isDie = false;
 
         StartCoroutine("CheckState");
@@ -45,9 +47,12 @@ public class EnemyBase : MonoBehaviour
     }
 
     private void Update()
-    {   
-        Vector3 p = _mainCamera.WorldToScreenPoint(gameObject.transform.localPosition);
-        _gestureTransform.anchoredPosition3D = new Vector3(p.x, p.y - 60f);
+    {
+        Vector3 p = _mainCamera.WorldToScreenPoint(_onObj[0].gameObject.transform.position);
+        Debug.Log("초기 위치 : " + p);
+
+        _gestureTransform.anchoredPosition3D = new Vector3(p.x, p.y, 0);// ; - 10f);// - 60f);
+        _gestureNumberTransform.anchoredPosition3D = new Vector3(p.x, p.y, 0); //new Vector3(p.x + 40f, p.y + 60f);
 
         if (_gestureGroup.EnemyLife <= 0) _enemyState = ENEMYSTATE.DIE;
     }
@@ -56,9 +61,17 @@ public class EnemyBase : MonoBehaviour
     {
         OnOffEnemyRender(false);
         this.gameObject.SetActive(true);
-        if (Random.Range(0,2) == 0)
-            this.transform.localPosition = new Vector3(Random.Range(-20, 20), 0, -30);
-        else this.transform.localPosition = new Vector3(Random.Range(-20, 20), 0, 30);
+        if (Random.Range(0, 2) == 0)
+        {
+            _onObj[0].transform.localPosition = new Vector3(Random.Range(-1.6f, 1.6f), -3, 0);  // -0.9
+            _isRespawnDirUp = false;
+        }
+        else
+        {
+            _onObj[0].transform.localPosition = new Vector3(Random.Range(-1.6f, 1.6f), 3, 0);  // 0.3
+            _isRespawnDirUp = true;
+        }
+        Debug.Log("초기 포지션? : " + _onObj[0].transform.localPosition);
         _gestureGroup.InitGestureGroup();
                 
         StartCoroutine(activeEnemy());
@@ -146,7 +159,9 @@ public class EnemyBase : MonoBehaviour
                 case ENEMYSTATE.NONE:
                     break;
                 case ENEMYSTATE.MOVE:
-                    transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0, 0, -6.5f), Time.deltaTime * _speed);
+                    if (_isRespawnDirUp)
+                        _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, 0.3f, 0f), Time.deltaTime * _speed);
+                    else _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, -0.9f, 0f), Time.deltaTime * _speed);
                     break;
                 case ENEMYSTATE.ATTACK:
                     break;

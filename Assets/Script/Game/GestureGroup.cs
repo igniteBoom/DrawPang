@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class GestureGroup : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class GestureGroup : MonoBehaviour
     }
     public GameObject _gestureItem;
     public int _gestureNum;
+    public int _seeGestureNum;
+    public TextMeshProUGUI _numberText;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class GestureGroup : MonoBehaviour
     public void InitGestureGroup()
     {
         _gestureNum = 10;
+        _seeGestureNum = 2;
         for (int i = 0; i < _gestureNum; i++)
         {
             GameObject tmpEnemy = Instantiate(_gestureItem, this.transform);
@@ -38,12 +42,13 @@ public class GestureGroup : MonoBehaviour
             _GestureList[i].GetComponent<GestureItem>().InitGestureItem(GestureItem.GESTURETYPE.LEV1);
         }
 
-        int tmpIndex = _GestureList.Count - 2;          // 24 - 2 == 22
+        int tmpIndex = _GestureList.Count - 1;         // 24 - 2 == 22
+        _numberText.text = _GestureList.Count.ToString();
         for (int i = 0; i < _GestureList.Count; i++)
         {
             _GestureList[i].transform.localPosition = new Vector3(_GestureList[i].GetComponent<RectTransform>().rect.width * (i - tmpIndex)
-                + (i - tmpIndex) * 10, 50, 0);            // 0 - 22 * width       23 - 22 * width
-            if (i >= _GestureList.Count - 3)
+                + (i - tmpIndex) * 10, 0, 0);            // 0 - 22 * width       23 - 22 * width
+            if (i >= _GestureList.Count - _seeGestureNum)
             {
                 _GestureList[i].SetActive(true);
             }
@@ -92,15 +97,16 @@ public class GestureGroup : MonoBehaviour
     }
     private void moveGesture()
     {
-        int tmpIndex = _GestureList.Count - 2;
+        int tmpIndex = _GestureList.Count - 1;
+        _numberText.text = _GestureList.Count.ToString();
         for (int i = 0; i < _GestureList.Count; i++)
         {
-            _GestureList[i].GetComponent<RectTransform>().DOAnchorPosX(_GestureList[i].GetComponent<RectTransform>().rect.width * (i - tmpIndex) + (i - tmpIndex) * 10, 0.2f).SetEase(Ease.OutBounce);
-            if (i > _GestureList.Count - 3)
+            Debug.Log("_GestureList.Count : " + _GestureList.Count);            
+            if (i > _GestureList.Count - _seeGestureNum)
             {
                 _GestureList[i].SetActive(true);
             }
-            else if(i == _GestureList.Count - 3)
+            else if(i == _GestureList.Count - _seeGestureNum)
             {
                 StartCoroutine(delayFalseObject(0.1f, i));
                 //_GestureList[i].SetActive(false);
@@ -109,6 +115,7 @@ public class GestureGroup : MonoBehaviour
             {
                 _GestureList[i].SetActive(false);
             }
+            _GestureList[i].GetComponent<RectTransform>().DOAnchorPosX(_GestureList[i].GetComponent<RectTransform>().rect.width * (i - tmpIndex) + (i - tmpIndex) * 10, 0.2f).SetEase(Ease.OutExpo);
         }
     }
 
