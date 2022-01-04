@@ -8,9 +8,11 @@ public class EnemiesController : MonoBehaviour
 {
     public GameSceneController _gameSceneScontroller;
     private bool _cheaterDetected = false;
-    public GameObject _enemy;
+    public GameObject _enemy, _gesture;
+    public Transform _enemyTr, _gestureTr;
     public Camera _uiCamera;
     private List<GameObject> _listEnemy = new List<GameObject>();
+    private List<GameObject> _listGesture = new List<GameObject>();
     [SerializeField] 
     private const int _enemyNum = 60;
 
@@ -20,14 +22,25 @@ public class EnemiesController : MonoBehaviour
     {
         ObscuredCheatingDetector.StartDetection(OnCheaterDetected);
         InitVariable();
-
+        
+        //Enemy 생성
         for (int i = 0; i < _enemyNum; i++)
         {
-            GameObject tmpEnemy = Instantiate(_enemy, this.transform);
+            GameObject tmpEnemy = Instantiate(_enemy, _enemyTr);
             tmpEnemy.name = "Enemy[" + i + "]";
-            tmpEnemy.GetComponent<EnemyBase>()._uiCanvas.worldCamera = this._uiCamera;
+            tmpEnemy.GetComponent<EnemyBase>()._uiCamera = this._uiCamera;
             _listEnemy.Add(tmpEnemy);
             _listEnemy[i].gameObject.SetActive(false);
+        }
+
+        //EnemyGesture 생성
+        for (int i = 0; i < _enemyNum; i++)
+        {
+            GameObject tmpGesture = Instantiate(_gesture, _gestureTr);
+            tmpGesture.name = "Gesture[" + i + "]";
+            //tmpGesture.GetComponent<EnemyBase>()._uiCanvas.worldCamera = this._uiCamera;
+            _listGesture.Add(tmpGesture);
+            _listGesture[i].gameObject.SetActive(false);
         }
     }
     private void OnCheaterDetected()
@@ -50,15 +63,17 @@ public class EnemiesController : MonoBehaviour
     {
         for (int i = 0; i < _enemyNum; i++)
         {
-            if(_listEnemy[i].gameObject.activeSelf == false && i == 0)  // i = 0 테스트 할라고 하나만 심어놓음
+            if(_listEnemy[i].gameObject.activeSelf == false)  // i = 0 테스트 할라고 하나만 심어놓음
             {
+                //EnemyBase의 gestureGroup을 따로 떼어내면서 새로 생성해준 Gesture그룹을 연결해준다.
+                _listEnemy[i].GetComponent<EnemyBase>()._gestureGroup = _listGesture[i].GetComponent<GestureBase>()._gestureGroup;
                 _listEnemy[i].GetComponent<EnemyBase>().SetEnemyInit(gameLev);
                 return;
             }
         }
     }
 
-    public void KillEnemy()
+    public void KillEnemy() //테스트 함수
     {
         List<GameObject> tmpEnemy = new List<GameObject>();
         for (int i = 0; i < _enemyNum; i++)

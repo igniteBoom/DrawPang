@@ -15,81 +15,86 @@ public class EnemyBase : MonoBehaviour
 
     public ENEMYSTATE _enemyState = ENEMYSTATE.NONE;
     public bool _isDie = false;
+
     public GestureGroup _gestureGroup;
     public Animator _aniState;
-    private Transform _pos;
-    public float _speed = 0.01f;
-    public float _knockback;
-    public float _knockbackinit = 1f; // ~5
-    public float _knockbackP = 0.95f;
+    public Transform _pos;
+    public float _speed, _knockback, _knockbackinit, _knockbackP;
     public RectTransform _gestureTransform;
     public RectTransform _gestureNumberTransform;
-    public Camera _mainCamera;
-    public Canvas _uiCanvas;
-    public GameObject[] _onObj;
+    public Camera _uiCamera;
+
+    //public Canvas _uiCanvas;
+    //public GameObject[] _onObj;
     public bool _isRespawnDirUp;
     private Vector3 _movement;
-    private Rigidbody _rigdbody;
+    //private Rigidbody _rigdbody;
 
     private void Awake()
     {
-        _rigdbody = _onObj[0].GetComponent<Rigidbody>();
+        //_rigdbody = _onObj[0].GetComponent<Rigidbody>();
     }
     private void OnEnable()
     {
-        //_aniState = _onObj[0].gameObject.GetComponent<Animator>();
-        _pos = _onObj[0].transform;
-        _isDie = false;
+        InitVariable();
 
         StartCoroutine("CheckState");
         StartCoroutine("CheckAction");
 
-        _mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        _uiCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+    }
+    public void InitVariable()
+    {
+        _isDie = false;
+
+        _speed = 5f;
+        _knockback = 0f;
+        _knockbackinit = 1f; // ~5
+        _knockbackP = 0.95f;
     }
 
     private void Update()
     {
-        Vector3 p = _mainCamera.WorldToScreenPoint(_onObj[0].gameObject.transform.position);
-        //Debug.Log("초기 위치 : " + p);
+        Vector3 p = _uiCamera.WorldToScreenPoint(_pos.position);
+        Vector2 localPos = Vector2.zero;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(GameSceneController._instance._rectTranfromCanvasUI, p,_uiCamera, out localPos);
 
-        _gestureTransform.anchoredPosition3D = new Vector3(p.x, p.y, 0);// ; - 10f);// - 60f);
-        _gestureNumberTransform.anchoredPosition3D = new Vector3(p.x, p.y, 0); //new Vector3(p.x + 40f, p.y + 60f);
+        _gestureGroup.GetComponent<RectTransform>().anchoredPosition3D = new Vector2(localPos.x, localPos.y - 20);
+        _gestureGroup._gestureNumberTransform.GetComponent<RectTransform>().anchoredPosition3D = new Vector2(localPos.x + 50, localPos.y + 70);
 
-        if (_gestureGroup.EnemyLife <= 0) _enemyState = ENEMYSTATE.DIE;
+        if (_gestureGroup.gameObject.activeSelf && _gestureGroup.EnemyLife <= 0) _enemyState = ENEMYSTATE.DIE;
     }
 
     public void SetEnemyInit(int gameLev)
     {
-        OnOffEnemyRender(false);
+        _pos.gameObject.SetActive(false);
         this.gameObject.SetActive(true);
         if (Random.Range(0, 2) == 0)
         {
-            _onObj[0].transform.localPosition = new Vector3(Random.Range(-25, 25), 0, -50);  // -0.9
+            _pos.localPosition = new Vector3(Random.Range(-37, 37), -70, 0);  // -0.9
             _isRespawnDirUp = false;
         }
         else
         {
-            _onObj[0].transform.localPosition = new Vector3(Random.Range(-25, 25), 0, 30);  // 0.3
+            _pos.localPosition = new Vector3(Random.Range(-37, 37), 50, 0);  // 0.3
             _isRespawnDirUp = true;
         }
-        Debug.Log("초기 포지션? : " + _onObj[0].transform.localPosition);
+        Debug.Log("초기 포지션? : " + _pos.localPosition);
         _gestureGroup.InitGestureGroup();
                 
         StartCoroutine(activeEnemy());
         MOVE_Enemy();
     }
+
+    /// <summary>
+    /// Enemy가 생성되고 위치가 바뀌는게 보여서 만듬
+    /// </summary>
+    /// <returns></returns>
     IEnumerator activeEnemy()
     {
         yield return new WaitForEndOfFrame();
-        OnOffEnemyRender(true);
-    }
-
-    public void OnOffEnemyRender(bool isOnOff)
-    {
-        foreach(var item in _onObj)
-        {
-            item.SetActive(isOnOff);
-        }
+        _gestureGroup._gestureBase.gameObject.SetActive(true);
+        _pos.gameObject.SetActive(true);
     }
 
     public void NONE_Enemy()
@@ -138,6 +143,7 @@ public class EnemyBase : MonoBehaviour
                 {
                     _isDie = true;
                     this.gameObject.SetActive(false);
+                    _gestureGroup._gestureBase.gameObject.SetActive(false);
                 }
             }
             if (_aniState.GetCurrentAnimatorStateInfo(0).IsName("Damage3") && _aniState.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
@@ -161,8 +167,8 @@ public class EnemyBase : MonoBehaviour
                     break;
                 case ENEMYSTATE.MOVE:
                     if (_isRespawnDirUp)
-                        _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, 0f, 6f), Time.deltaTime * _speed);
-                    else _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, 0f, -18f), Time.deltaTime * _speed);
+                        _pos.localPosition = Vector3.MoveTowards(_pos.transform.localPosition, new Vector3(0, 0f, 0f), Time.deltaTime * _speed);
+                    else _pos.localPosition = Vector3.MoveTowards(_pos.transform.localPosition, new Vector3(0, 0f, 0f), Time.deltaTime * _speed);
                     break;
                 case ENEMYSTATE.ATTACK:
                     break;

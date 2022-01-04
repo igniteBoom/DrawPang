@@ -44,6 +44,12 @@ public class GestureItem : MonoBehaviour
     {
         if (_cheaterDetected) Application.Quit();
     }
+
+    public void SetSize(float width, float height)
+    {
+        this.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
+    }
+
     public void InitGestureItem(GESTURETYPE gestureType)
     {
         _myImage = this.GetComponent<Image>();

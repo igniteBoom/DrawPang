@@ -7,6 +7,8 @@ using TMPro;
 
 public class GestureGroup : MonoBehaviour
 {
+    public GestureBase _gestureBase;
+    public GameObject _gestureNumberTransform;
     private List<GameObject> _GestureList = new List<GameObject>();
     public int EnemyLife { get { return _GestureList.Count; } }
     public string CurrentGesture
@@ -24,11 +26,10 @@ public class GestureGroup : MonoBehaviour
     public int _gestureNum;
     public int _seeGestureNum;
     public TextMeshProUGUI _numberText;
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
     }
+
     public void InitGestureGroup()
     {
         _gestureNum = 10;

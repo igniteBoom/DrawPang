@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 public class GameSceneController : MonoBehaviour
 {
+    static public GameSceneController _instance;
     // 위 아래 20개씩 오브젝트풀
     // 몬스터 생성을 어떻게 해야할까?? mesh, materials, 제스쳐 갯수, 제스쳐 난이도
     // Start is called before the first  frame update
@@ -14,6 +15,8 @@ public class GameSceneController : MonoBehaviour
     public ObscuredInt _gameLev = 1;
     private bool _cheaterDetected = false;
 
+    public RectTransform _rectTranfromCanvasUI;
+    public RectTransform _rectTranformCanvasParticle;
     public EnemiesController _enemiesController;
     public PlayerController _playerController;
     public TextMeshProUGUI _scoreText;
@@ -56,6 +59,10 @@ public class GameSceneController : MonoBehaviour
         set { _goodScore = value; }
     }
 
+    private void Awake()
+    {
+        _instance = this;
+    }
     void Start()
     {
         ObscuredCheatingDetector.StartDetection(OnCheaterDetected);
