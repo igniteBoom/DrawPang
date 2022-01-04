@@ -25,6 +25,7 @@ public class EnemyBase : MonoBehaviour
     public RectTransform _gestureTransform;
     public RectTransform _gestureNumberTransform;
     public Camera _mainCamera;
+    public Canvas _uiCanvas;
     public GameObject[] _onObj;
     public bool _isRespawnDirUp;
     private Vector3 _movement;
@@ -49,7 +50,7 @@ public class EnemyBase : MonoBehaviour
     private void Update()
     {
         Vector3 p = _mainCamera.WorldToScreenPoint(_onObj[0].gameObject.transform.position);
-        Debug.Log("초기 위치 : " + p);
+        //Debug.Log("초기 위치 : " + p);
 
         _gestureTransform.anchoredPosition3D = new Vector3(p.x, p.y, 0);// ; - 10f);// - 60f);
         _gestureNumberTransform.anchoredPosition3D = new Vector3(p.x, p.y, 0); //new Vector3(p.x + 40f, p.y + 60f);
@@ -63,12 +64,12 @@ public class EnemyBase : MonoBehaviour
         this.gameObject.SetActive(true);
         if (Random.Range(0, 2) == 0)
         {
-            _onObj[0].transform.localPosition = new Vector3(Random.Range(-1.6f, 1.6f), -3, 0);  // -0.9
+            _onObj[0].transform.localPosition = new Vector3(Random.Range(-25, 25), 0, -50);  // -0.9
             _isRespawnDirUp = false;
         }
         else
         {
-            _onObj[0].transform.localPosition = new Vector3(Random.Range(-1.6f, 1.6f), 3, 0);  // 0.3
+            _onObj[0].transform.localPosition = new Vector3(Random.Range(-25, 25), 0, 30);  // 0.3
             _isRespawnDirUp = true;
         }
         Debug.Log("초기 포지션? : " + _onObj[0].transform.localPosition);
@@ -160,8 +161,8 @@ public class EnemyBase : MonoBehaviour
                     break;
                 case ENEMYSTATE.MOVE:
                     if (_isRespawnDirUp)
-                        _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, 0.3f, 0f), Time.deltaTime * _speed);
-                    else _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, -0.9f, 0f), Time.deltaTime * _speed);
+                        _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, 0f, 6f), Time.deltaTime * _speed);
+                    else _onObj[0].transform.localPosition = Vector3.MoveTowards(_onObj[0].transform.transform.localPosition, new Vector3(0, 0f, -18f), Time.deltaTime * _speed);
                     break;
                 case ENEMYSTATE.ATTACK:
                     break;

@@ -9,6 +9,7 @@ public class EnemiesController : MonoBehaviour
     public GameSceneController _gameSceneScontroller;
     private bool _cheaterDetected = false;
     public GameObject _enemy;
+    public Camera _uiCamera;
     private List<GameObject> _listEnemy = new List<GameObject>();
     [SerializeField] 
     private const int _enemyNum = 60;
@@ -24,6 +25,7 @@ public class EnemiesController : MonoBehaviour
         {
             GameObject tmpEnemy = Instantiate(_enemy, this.transform);
             tmpEnemy.name = "Enemy[" + i + "]";
+            tmpEnemy.GetComponent<EnemyBase>()._uiCanvas.worldCamera = this._uiCamera;
             _listEnemy.Add(tmpEnemy);
             _listEnemy[i].gameObject.SetActive(false);
         }
@@ -48,7 +50,7 @@ public class EnemiesController : MonoBehaviour
     {
         for (int i = 0; i < _enemyNum; i++)
         {
-            if(_listEnemy[i].gameObject.activeSelf == false && i == 0)
+            if(_listEnemy[i].gameObject.activeSelf == false && i == 0)  // i = 0 테스트 할라고 하나만 심어놓음
             {
                 _listEnemy[i].GetComponent<EnemyBase>().SetEnemyInit(gameLev);
                 return;

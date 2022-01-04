@@ -1,27 +1,64 @@
 fileFormatVersion: 2
 guid: f780ead220eca4d428cbbc6cb77d7348
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: center
-    100002: head
-    100004: root
-    100006: tail
-    100008: //RootNode
-    100010: Whispa_A
-    400000: center
-    400002: head
-    400004: root
-    400006: tail
-    400008: //RootNode
-    400010: Whispa_A
-    2100000: M_Whispa_01
-    4300000: Whispa_A
-    9500000: //RootNode
-    13700000: Whispa_A
-  externalObjects: {}
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: center
+  - first:
+      1: 100002
+    second: head
+  - first:
+      1: 100004
+    second: root
+  - first:
+      1: 100006
+    second: tail
+  - first:
+      1: 100008
+    second: //RootNode
+  - first:
+      1: 100010
+    second: Whispa_A
+  - first:
+      4: 400000
+    second: center
+  - first:
+      4: 400002
+    second: head
+  - first:
+      4: 400004
+    second: root
+  - first:
+      4: 400006
+    second: tail
+  - first:
+      4: 400008
+    second: //RootNode
+  - first:
+      4: 400010
+    second: Whispa_A
+  - first:
+      21: 2100000
+    second: M_Whispa_01
+  - first:
+      43: 4300000
+    second: Whispa_A
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Whispa_A
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Whispa_01
+    second: {fileID: 2100000, guid: d1165b44a555c47fe8f8f43f3814f065, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 2
     materialLocation: 0
@@ -54,25 +91,28 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -81,10 +121,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -94,13 +134,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
