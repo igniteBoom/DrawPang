@@ -44,7 +44,7 @@ public class EnemyBase : MonoBehaviour
 
         _speed = 5f;
         _knockback = 0f;
-        _knockbackinit = 1f; // ~5
+        _knockbackinit = 0.01f; // ~5
         _knockbackP = 0.95f;
     }
 
@@ -175,7 +175,17 @@ public class EnemyBase : MonoBehaviour
                     ATTACK_Enemy();
                     break;
                 case ENEMYSTATE.DAMAGE:
-                    _pos.localPosition = new Vector3(_pos.localPosition.x + _knockback, _pos.localPosition.y, _pos.localPosition.z + _knockback);
+                    Vector3 v = new Vector3(0f, 0f, 0f) - _regenPos;
+                    v = v * _knockback;
+                    _pos.localPosition = _pos.localPosition - v;
+                    //if(_pos.localPosition.x > 0)
+                    //    _pos.localPosition = new Vector3(_pos.localPosition.x + _knockback, _pos.localPosition.y, _pos.localPosition.z);
+                    //else if(_pos.localPosition.x < 0)
+                    //    _pos.localPosition = new Vector3(_pos.localPosition.x - _knockback, _pos.localPosition.y, _pos.localPosition.z);
+                    //if(_pos.localPosition.y > 0)
+                    //    _pos.localPosition = new Vector3(_pos.localPosition.x, _pos.localPosition.y + _knockback, _pos.localPosition.z);
+                    //else if(_pos.localPosition.y < 0)
+                    //    _pos.localPosition = new Vector3(_pos.localPosition.x, _pos.localPosition.y - _knockback, _pos.localPosition.z);
                     _knockback *= _knockbackP;
                     break;
                 case ENEMYSTATE.DIE:
@@ -202,6 +212,7 @@ public class EnemyBase : MonoBehaviour
         if (_gestureGroup)
         {
             _gestureGroup.DrawGesture(result, out IsCollect);
+            if (IsCollect) DAMAGE_Enemy();
         }
         return IsCollect;
         //Debug.Log("EnemyBase DrawGesture : " + result);
