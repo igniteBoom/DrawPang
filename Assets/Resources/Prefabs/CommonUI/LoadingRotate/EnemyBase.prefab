@@ -215,7 +215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gestureBase: {fileID: 0}
   _gestureNumberTransform: {fileID: 0}
-  gestureSize: 0
   _gestureItem: {fileID: 1368246850879282745, guid: f9dcabc751d673f4abf4a8934b9916da,
     type: 3}
   _gestureNum: 20
@@ -421,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5807139461228730698
 Transform:
   m_ObjectHideFlags: 0
@@ -455,6 +454,7 @@ MonoBehaviour:
   _gestureGroup: {fileID: 0}
   _aniState: {fileID: 8457625275850141888}
   _pos: {fileID: 4851821554396763994}
+  _regenPos: {x: 0, y: 0, z: 0}
   _speed: 1
   _knockback: 0
   _knockbackinit: 1
@@ -462,9 +462,6 @@ MonoBehaviour:
   _gestureTransform: {fileID: 1376922338}
   _gestureNumberTransform: {fileID: 1909853943}
   _uiCamera: {fileID: 0}
-  _test1: {fileID: 0}
-  _test2: {fileID: 0}
-  _isRespawnDirUp: 0
 --- !u!1 &3639601876438113523
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +491,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6877164722822347915}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.4786966, y: 0.62552226, z: -1.8545337}
 --- !u!1 &4488143215652774433
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +505,7 @@ GameObject:
   - component: {fileID: 6302609174458515500}
   - component: {fileID: 4668589040741281686}
   - component: {fileID: 2512324321458557823}
+  - component: {fileID: 6990080253771477074}
   m_Layer: 0
   m_Name: EnemyAnim
   m_TagString: Untagged
@@ -573,9 +571,9 @@ BoxCollider:
   m_GameObject: {fileID: 4488143215652774433}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 0.5, y: 0.6, z: 0.5}
   m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!54 &2512324321458557823
 Rigidbody:
@@ -593,6 +591,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6990080253771477074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488143215652774433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea7e11f0ecf3904195277f85d2724d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyBase: {fileID: 952644341}
 --- !u!1 &4616110942879246355
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +787,7 @@ Transform:
   - {fileID: 5073507119842266000}
   m_Father: {fileID: 1645044604709548436}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.8637291, y: -0.84562224, z: -1.2367456}
 --- !u!1 &8956999900161141581
 GameObject:
   m_ObjectHideFlags: 0

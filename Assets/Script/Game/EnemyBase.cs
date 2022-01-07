@@ -19,16 +19,11 @@ public class EnemyBase : MonoBehaviour
     public GestureGroup _gestureGroup;
     public Animator _aniState;
     public Transform _pos;
+    public Vector3 _regenPos;
     public float _speed, _knockback, _knockbackinit, _knockbackP;
     public RectTransform _gestureTransform;
     public RectTransform _gestureNumberTransform;
     public Camera _uiCamera;
-
-    //public Canvas _uiCanvas;
-    //public GameObject[] _onObj;
-    public bool _isRespawnDirUp;
-    private Vector3 _movement;
-    //private Rigidbody _rigdbody;
 
     private void Awake()
     {
@@ -71,13 +66,13 @@ public class EnemyBase : MonoBehaviour
         this.gameObject.SetActive(true);
         if (Random.Range(0, 2) == 0)
         {
-            _pos.localPosition = new Vector3(Random.Range(-37, 37), -70, 0);  // -0.9
-            _isRespawnDirUp = false;
+            _regenPos = new Vector3(Random.Range(-37, 37), -70, 0);  // -0.9
+            _pos.localPosition = _regenPos;  // -0.9
         }
         else
         {
-            _pos.localPosition = new Vector3(Random.Range(-37, 37), 50, 0);  // 0.3
-            _isRespawnDirUp = true;
+            _regenPos = new Vector3(Random.Range(-37, 37), 50, 0);  // 0.3
+            _pos.localPosition = _regenPos;  // 0.3
         }
         Debug.Log("초기 포지션? : " + _pos.localPosition);
         _gestureGroup.InitGestureGroup();
@@ -165,12 +160,19 @@ public class EnemyBase : MonoBehaviour
             {
                 case ENEMYSTATE.NONE:
                     break;
-                case ENEMYSTATE.MOVE:
-                    if (_isRespawnDirUp)
-                        _pos.localPosition = Vector3.MoveTowards(_pos.transform.localPosition, new Vector3(0, 0f, 0f), Time.deltaTime * _speed);
-                    else _pos.localPosition = Vector3.MoveTowards(_pos.transform.localPosition, new Vector3(0, 0f, 0f), Time.deltaTime * _speed);
+                case ENEMYSTATE.MOVE:                    
+                    /* 콜라이더로 해결!
+                    float tmpx, tmpy;
+                    float dis = 10; //원점에서의 거리
+
+                    Vector3 v = _regenPos - new Vector3(1f, 0f);                    
+                    tmpx = dis * Mathf.Cos(Mathf.Atan2(v.y, v.x));
+                    tmpy = dis * Mathf.Sin(Mathf.Atan2(v.y, v.x));
+                    */
+                    _pos.localPosition = Vector3.MoveTowards(_pos.transform.localPosition, new Vector3(0f, 0f, 0f), Time.deltaTime * _speed);
                     break;
                 case ENEMYSTATE.ATTACK:
+                    ATTACK_Enemy();
                     break;
                 case ENEMYSTATE.DAMAGE:
                     _pos.localPosition = new Vector3(_pos.localPosition.x + _knockback, _pos.localPosition.y, _pos.localPosition.z + _knockback);
@@ -186,6 +188,7 @@ public class EnemyBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter" + collision.gameObject.name);
         if (collision.gameObject.transform.parent.gameObject.name == "Player")
         {
             _enemyState = ENEMYSTATE.ATTACK ;
