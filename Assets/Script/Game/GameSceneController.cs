@@ -41,7 +41,7 @@ public class GameSceneController : MonoBehaviour
 
     public int MyScore { 
         get { return _myScore; }
-        set { _myScore = value; _scoreText.text = _myScore.ToString(); }
+        set { _myScore = value; _scoreText.text = GetThousandCommaText(_myScore).ToString(); }
     }
 
     public int PerfectScore {
@@ -82,7 +82,7 @@ public class GameSceneController : MonoBehaviour
         _perfectPct = 0.95f;
         _greatPct = 0.9f;
         _myScore = 0;
-        _scoreText.text = _myScore.ToString();
+        _scoreText.text = 0.ToString();//GetThousandCommaText(_myScore).ToString();
         _perfectScore = 100;
         _greatScore = 80;
         _goodScore = 50;
@@ -141,5 +141,9 @@ public class GameSceneController : MonoBehaviour
                 _enemiesController.KillEnemy();
             }
         }
+    }
+    public string GetThousandCommaText(int data)
+    {
+        return string.Format("{0:#,###}", data);
     }
 }
