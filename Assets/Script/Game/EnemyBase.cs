@@ -44,7 +44,7 @@ public class EnemyBase : MonoBehaviour
 
         _speed = 5f;
         _knockback = 0f;
-        _knockbackinit = 0.01f; // ~5
+        _knockbackinit = 0.005f; // ~5
         _knockbackP = 0.95f;
     }
 
@@ -115,6 +115,10 @@ public class EnemyBase : MonoBehaviour
         _knockback = _knockbackinit;
         _enemyState = ENEMYSTATE.DAMAGE;
         _aniState.SetInteger("animation", 3);
+        if (_aniState.GetCurrentAnimatorStateInfo(0).IsName("Damage3") && _aniState.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.1f)
+        {
+            _aniState.Play("Damage3", -1, 0);
+        }
     }
 
     public void DIE_Enemy()
