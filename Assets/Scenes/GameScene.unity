@@ -2606,7 +2606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -285, y: -190}
+  m_AnchoredPosition: {x: -280, y: -190}
   m_SizeDelta: {x: 100, y: 106.500854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &280228171
@@ -7104,18 +7104,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740111512}
   m_CullTransparentMesh: 0
---- !u!114 &746435969 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1481981007152624969, guid: 5b32c5ee842155942bc3acde9c75c008,
-    type: 3}
-  m_PrefabInstance: {fileID: 217030731}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &768977019
 GameObject:
   m_ObjectHideFlags: 0
@@ -13701,6 +13689,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1657586489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 394740558855973234, guid: efa7927c25dc42641890e09a8c9618f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8752420125278917056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1684685473
 GameObject:
   m_ObjectHideFlags: 0
@@ -16251,7 +16251,7 @@ MonoBehaviour:
   _enemiesController: {fileID: 1135072885}
   _playerController: {fileID: 464361729}
   _scoreText: {fileID: 280228171}
-  _slider: {fileID: 746435969}
+  _slider: {fileID: 1657586489}
   _isOver:
     currentCryptoKey: 106
     hiddenValue: 223
@@ -16354,6 +16354,18 @@ MonoBehaviour:
     inited: 1
     fakeValue: 0
     fakeValueActive: 0
+  _plusTimeOffset:
+    migratedVersion: 
+    currentCryptoKey: 1283745166
+    hiddenValue: 1281721486
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
   _myScore:
     currentCryptoKey: 1062190939
     hiddenValue: 1062190939
@@ -19043,21 +19055,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 394740558855973235, guid: 92e08ccca18a96c4397755593e3821cc,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 394740558855973235, guid: 92e08ccca18a96c4397755593e3821cc,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 394740558855973235, guid: 92e08ccca18a96c4397755593e3821cc,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 394740558855973235, guid: 92e08ccca18a96c4397755593e3821cc,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -19197,6 +19194,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SliderBar_Item_Timer
       objectReference: {fileID: 0}
+    - target: {fileID: 394740558855973234, guid: efa7927c25dc42641890e09a8c9618f6,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 394740558855973235, guid: efa7927c25dc42641890e09a8c9618f6,
         type: 3}
       propertyPath: m_Pivot.x
@@ -19241,21 +19243,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 42
-      objectReference: {fileID: 0}
-    - target: {fileID: 394740558855973235, guid: efa7927c25dc42641890e09a8c9618f6,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 394740558855973235, guid: efa7927c25dc42641890e09a8c9618f6,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 394740558855973235, guid: efa7927c25dc42641890e09a8c9618f6,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 394740558855973235, guid: efa7927c25dc42641890e09a8c9618f6,
         type: 3}

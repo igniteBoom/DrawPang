@@ -25,7 +25,7 @@ public class GameSceneController : MonoBehaviour
     [SerializeField]
     private ObscuredBool _isOver = false;
     [SerializeField]
-    private ObscuredFloat _totalTime, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct;
+    private ObscuredFloat _totalTime, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset;
     [SerializeField]
     private ObscuredInt _myScore, _perfectScore, _greatScore, _goodScore;
 
@@ -59,6 +59,15 @@ public class GameSceneController : MonoBehaviour
         set { _goodScore = value; }
     }
 
+    public float PlusTimeOffset {
+        get { return _plusTimeOffset; }
+    }
+
+    public float TotalTime {
+        get { return _totalTime; }
+        set { _totalTime = value; }
+    }
+
     private void Awake()
     {
         _instance = this;
@@ -86,6 +95,7 @@ public class GameSceneController : MonoBehaviour
         _perfectScore = 100;
         _greatScore = 80;
         _goodScore = 50;
+        _plusTimeOffset = 1f;
 
         _slider.value = 1f;
 

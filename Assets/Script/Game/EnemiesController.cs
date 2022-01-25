@@ -135,6 +135,12 @@ public class EnemiesController : MonoBehaviour
 
     public void OnTextEffect(float score)
     {
+        //+시간
+        Debug.Log("+ 얼마일까? " + _gameSceneScontroller.PlusTimeOffset * score);
+
+        _gameSceneScontroller.TotalTime += _gameSceneScontroller.PlusTimeOffset * score;
+        if (_gameSceneScontroller.TotalTime >= 60f) _gameSceneScontroller.TotalTime = 60f;
+        //이펙트 출력
         if (score >= _gameSceneScontroller.PerfectPct)
         {
             for(int i = 0; i < _perfectEffect.Length; i++)
