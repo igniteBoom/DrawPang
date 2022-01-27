@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427182, b: 0.5645241, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12477,9 +12477,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de4d9ac8fd8f74a42aae768799e4ae02, type: 3}
---- !u!224 &1505020740 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4817508625998123715, guid: de4d9ac8fd8f74a42aae768799e4ae02,
+--- !u!4 &1505020740 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 403016, guid: de4d9ac8fd8f74a42aae768799e4ae02,
     type: 3}
   m_PrefabInstance: {fileID: 1505020739}
   m_PrefabAsset: {fileID: 0}
@@ -16251,7 +16251,8 @@ MonoBehaviour:
   _enemiesController: {fileID: 1135072885}
   _playerController: {fileID: 464361729}
   _scoreText: {fileID: 280228171}
-  _slider: {fileID: 1657586489}
+  _lifeSlider: {fileID: 5832186315483989257}
+  _timeSlider: {fileID: 1657586489}
   _isOver:
     currentCryptoKey: 106
     hiddenValue: 223
@@ -16270,6 +16271,18 @@ MonoBehaviour:
     inited: 1
     fakeValue: 60
     fakeValueActive: 1
+  _life:
+    migratedVersion: 
+    currentCryptoKey: 2090766952
+    hiddenValue: 2089983592
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
   _maxLevTime:
     migratedVersion: 
     currentCryptoKey: 1170821624
@@ -19115,6 +19128,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e08ccca18a96c4397755593e3821cc, type: 3}
+--- !u!114 &5832186315483989257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 394740558855973234, guid: 92e08ccca18a96c4397755593e3821cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5832186315483989256}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8016858217513893322
 PrefabInstance:
   m_ObjectHideFlags: 0

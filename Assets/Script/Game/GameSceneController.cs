@@ -20,12 +20,12 @@ public class GameSceneController : MonoBehaviour
     public EnemiesController _enemiesController;
     public PlayerController _playerController;
     public TextMeshProUGUI _scoreText;
-    public Slider _slider;
+    public Slider _lifeSlider, _timeSlider;
 
     [SerializeField]
     private ObscuredBool _isOver = false;
     [SerializeField]
-    private ObscuredFloat _totalTime, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset;
+    private ObscuredFloat _totalTime, _life, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset;
     [SerializeField]
     private ObscuredInt _myScore, _perfectScore, _greatScore, _goodScore;
 
@@ -68,6 +68,11 @@ public class GameSceneController : MonoBehaviour
         set { _totalTime = value; }
     }
 
+    public float Life {
+        get { return _life; }
+        set { _life = value; }
+    }
+
     private void Awake()
     {
         _instance = this;
@@ -97,7 +102,8 @@ public class GameSceneController : MonoBehaviour
         _goodScore = 50;
         _plusTimeOffset = 1f;
 
-        _slider.value = 1f;
+        _lifeSlider.value = 1f;
+        _timeSlider.value = 1f;
 
         _levTime = _maxLevTime;
         _respawnTime = _initRespawnTime;
@@ -118,7 +124,8 @@ public class GameSceneController : MonoBehaviour
             ///Total 시간 카운터
             _totalTime -= Time.deltaTime;
             if (_totalTime <= 0) _isOver = true;
-            _slider.value = _totalTime / 60f;
+            _timeSlider.value = _totalTime / 60f;
+            _lifeSlider.value = _life;
 
             ///Game Lev 카운터
             if (_levTime > 0)

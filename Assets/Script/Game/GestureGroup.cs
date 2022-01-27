@@ -29,7 +29,10 @@ public class GestureGroup : MonoBehaviour
     private void OnEnable()
     {
     }
-
+    public int GetEnemyLev(int i)
+    {
+        return (int)_GestureList[i].GetComponent<GestureItem>()._gestureType;
+    }
     public void InitGestureGroup()
     {
         _gestureNum = 10;

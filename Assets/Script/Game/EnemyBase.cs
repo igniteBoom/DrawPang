@@ -25,6 +25,7 @@ public class EnemyBase : MonoBehaviour
     public RectTransform _gestureNumberTransform;
     public Camera _uiCamera;
 
+    int tmp = 0;
     private void Awake()
     {
         //_rigdbody = _onObj[0].GetComponent<Rigidbody>();
@@ -150,6 +151,17 @@ public class EnemyBase : MonoBehaviour
                 _enemyState = ENEMYSTATE.MOVE;
                 _aniState.SetInteger("animation", 1);
             }
+            if (_aniState.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+            {
+                //애니메이션이 1초라서 normalizedTime 1초마다 공격받는 부분
+                if ((int)_aniState.GetCurrentAnimatorStateInfo(0).normalizedTime == tmp)
+                {
+                    tmp++;
+                    //this.gameObject.transform.parent.gameObject.GetComponent<EnemiesController>()._gameSceneScontroller.Life = this.gameObject.transform.parent.gameObject.GetComponent<EnemiesController>()._gameSceneScontroller.Life - _gestureGroup.GetEnemyLev(this.gameObject.transform.GetSiblingIndex());
+                    Debug.Log("index : " + _gestureGroup.GetEnemyLev(this.gameObject.transform.GetSiblingIndex()));
+                }
+            }
+
             yield return null;
         }
     }
