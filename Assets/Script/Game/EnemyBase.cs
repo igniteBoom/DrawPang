@@ -158,7 +158,12 @@ public class EnemyBase : MonoBehaviour
                 {
                     tmp++;
                     //this.gameObject.transform.parent.gameObject.GetComponent<EnemiesController>()._gameSceneScontroller.Life = this.gameObject.transform.parent.gameObject.GetComponent<EnemiesController>()._gameSceneScontroller.Life - _gestureGroup.GetEnemyLev(this.gameObject.transform.GetSiblingIndex());
-                    Debug.Log("index : " + _gestureGroup.GetEnemyLev(this.gameObject.transform.GetSiblingIndex()));
+
+                    GameSceneController._instance.Life -= _gestureGroup.GetEnemyLev(this.gameObject.transform.GetSiblingIndex()) * GameSceneController._instance.EnemyDamageOffset;
+
+                    //Debug.Log("name : " + this.gameObject.transform.GetSiblingIndex());
+
+                    //Debug.Log("index : " + _gestureGroup.GetEnemyLev(this.gameObject.transform.GetSiblingIndex()));
                 }
             }
 

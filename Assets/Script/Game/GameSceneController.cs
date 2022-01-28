@@ -25,7 +25,7 @@ public class GameSceneController : MonoBehaviour
     [SerializeField]
     private ObscuredBool _isOver = false;
     [SerializeField]
-    private ObscuredFloat _totalTime, _life, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset;
+    private ObscuredFloat _totalTime, _life, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset, _enemyDamageOffset;
     [SerializeField]
     private ObscuredInt _myScore, _perfectScore, _greatScore, _goodScore;
 
@@ -61,6 +61,10 @@ public class GameSceneController : MonoBehaviour
 
     public float PlusTimeOffset {
         get { return _plusTimeOffset; }
+    }
+
+    public float EnemyDamageOffset {
+        get { return _enemyDamageOffset; }
     }
 
     public float TotalTime {
@@ -101,7 +105,9 @@ public class GameSceneController : MonoBehaviour
         _greatScore = 80;
         _goodScore = 50;
         _plusTimeOffset = 1f;
+        _enemyDamageOffset = 0.05f;
 
+        _life = 1f;
         _lifeSlider.value = 1f;
         _timeSlider.value = 1f;
 
@@ -123,8 +129,8 @@ public class GameSceneController : MonoBehaviour
         {
             ///Total 시간 카운터
             _totalTime -= Time.deltaTime;
-            if (_totalTime <= 0) _isOver = true;
-            _timeSlider.value = _totalTime / 60f;
+            if (_totalTime <= 0 || _life <= 0) _isOver = true;
+                _timeSlider.value = _totalTime / 60f;
             _lifeSlider.value = _life;
 
             ///Game Lev 카운터

@@ -9,6 +9,7 @@ public class GestureItem : MonoBehaviour
 {
     public enum GESTURETYPE
     {
+        LEV0 = 0, //없는레벨
         LEV1,
         LEV2,
         LEV3,
@@ -20,7 +21,7 @@ public class GestureItem : MonoBehaviour
         LEV2to4,
         LEV3to4,
     }
-    public GESTURETYPE _gestureType = GESTURETYPE.LEV1;
+    public GESTURETYPE _gestureType;// = GESTURETYPE.LEV1;
 
     private bool _cheaterDetected = false;
 
@@ -52,6 +53,7 @@ public class GestureItem : MonoBehaviour
 
     public void InitGestureItem(GESTURETYPE gestureType)
     {
+        _gestureType = gestureType;
         _myImage = this.GetComponent<Image>();
         if (null == _myImage)
         {
@@ -61,6 +63,9 @@ public class GestureItem : MonoBehaviour
 
         switch (gestureType)
         {
+            case GESTURETYPE.LEV0:
+                Debug.LogError("쓰지 않는 Type");
+                break;
             case GESTURETYPE.LEV1:
                 _myImage.sprite = _gestureSprite[Random.Range(0, 4)];
                 break;
