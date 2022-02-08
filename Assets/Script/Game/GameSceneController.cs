@@ -15,6 +15,7 @@ public class GameSceneController : MonoBehaviour
     public ObscuredInt _gameLev = 1;
     private bool _cheaterDetected = false;
 
+    public GameObject _gesture;
     public RectTransform _rectTranfromCanvasUI;
     public RectTransform _rectTranformCanvasParticle;
     public EnemiesController _enemiesController;
@@ -23,7 +24,7 @@ public class GameSceneController : MonoBehaviour
     public Slider _lifeSlider, _timeSlider;
 
     [SerializeField]
-    private ObscuredBool _isOver = false;
+    private ObscuredBool _isOver = false, _onceOver = false;
     [SerializeField]
     private ObscuredFloat _totalTime, _life, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset, _enemyDamageOffset;
     [SerializeField]
@@ -124,6 +125,7 @@ public class GameSceneController : MonoBehaviour
         {
             //게임 종료시 처리
             _enemiesController.StopEnemy();
+            _onceOver = true;
         }
         else
         {

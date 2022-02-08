@@ -14,6 +14,7 @@ public class PopupManager : Singleton<PopupManager>
         CHEST_POPUP,
         HEAD_POPUP,
         WEAPON_POPUP,
+        GAMEOVER_POPUP,
     }
 
     PopupBase _getRefPopupByType(Popup_Type __createType)
@@ -26,6 +27,7 @@ public class PopupManager : Singleton<PopupManager>
             case Popup_Type.CHEST_POPUP:        return _chestPopup;
             case Popup_Type.HEAD_POPUP:         return _headPopup;
             case Popup_Type.WEAPON_POPUP:       return _weaponPopup;
+            case Popup_Type.GAMEOVER_POPUP:     return _gameOverPopup;
         }
         return null;
     }
@@ -38,6 +40,7 @@ public class PopupManager : Singleton<PopupManager>
     public PopupBase _chestPopup;
     public PopupBase _headPopup;
     public PopupBase _weaponPopup;
+    public PopupBase _gameOverPopup;
 
     List<PopupBase> _listPopupBase = new List<PopupBase>();
 
