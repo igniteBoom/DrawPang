@@ -120,14 +120,17 @@ public class GameSceneController : MonoBehaviour
     void Update()
     {
         if (_cheaterDetected) Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Space)) _isOver = true;
 
-        if (_isOver)
+        if (_isOver && !_onceOver)
         {
             //게임 종료시 처리
             _enemiesController.StopEnemy();
+            _enemiesController.AllDelEnemy();
+            PopupManager.Instance.CreatePopup<GameOverPopup>(PopupManager.Popup_Type.GAMEOVER_POPUP);
             _onceOver = true;
         }
-        else
+        else if (!_isOver && !_onceOver)
         {
             ///Total 시간 카운터
             _totalTime -= Time.deltaTime;
@@ -161,10 +164,10 @@ public class GameSceneController : MonoBehaviour
             }
 
             //Debug.Log("time : " + _levTime);
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _enemiesController.KillEnemy();
-            }
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    _enemiesController.KillEnemy();
+            //}
         }
     }
     public string GetThousandCommaText(int data)

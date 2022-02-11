@@ -88,6 +88,18 @@ public class EnemiesController : MonoBehaviour
         tmpEnemy[tmpIndex].gameObject.SetActive(false);
     }
 
+    public void AllDelEnemy()
+    {
+        for (int i = 0; i < _enemyNum; i++)
+        {
+            if (_listEnemy[i].gameObject.activeSelf == true)
+            {
+                _listEnemy[i].gameObject.SetActive(false);
+                _listGesture[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
     public void StopEnemy()
     {
         for (int i = 0; i < _enemyNum; i++)

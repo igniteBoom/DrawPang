@@ -50,7 +50,10 @@ public class GameOverPopup : PopupBase
     }
     private void OnEnable()
     {
-        Debug.Log("실행했습니다.");
-        _objStar[0].GetComponent<DOTweenAnimation>().DOKill();
+    }
+
+    public void OnClickRestart()
+    {
+        LoadingSceneController.LoadScene("GameScene");
     }
 }
