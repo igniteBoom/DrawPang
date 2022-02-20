@@ -39,13 +39,19 @@ public class GameOverPopup : PopupBase
         _time = time;
         _gold = gold;
 
-        _perfectText.text = _perfectCount.ToString();
-        _greatText.text = _greatCount.ToString();
-        _goodText.text = _goodCount.ToString();
-        _missText.text = _missCount.ToString();
-        _scoreText.text = _score.ToString();
-        _timeText.text = _time.ToString();
-        _goldText.text = _gold.ToString();
+        _perfectText.GetComponent<TypingString>().SetTypingString(_perfectCount.ToString(), 1f, 1f);
+        _greatText.GetComponent<TypingString>().SetTypingString(_greatCount.ToString(), 1f, 1f);
+        _goodText.GetComponent<TypingString>().SetTypingString(_goodCount.ToString(), 1f, 1f);
+        _missText.GetComponent<TypingString>().SetTypingString(_missCount.ToString(), 1f, 1f);
+        _scoreText.GetComponent<TypingString>().SetTypingString(_score.ToString(), 1f, 1f);
+
+        //_perfectText.text = _perfectCount.ToString();
+        //_greatText.text = _greatCount.ToString();
+        //_goodText.text = _goodCount.ToString();
+        //_missText.text = _missCount.ToString();
+        //_scoreText.text = _score.ToString();
+        //_timeText.text = _time.ToString();
+        //_goldText.text = _gold.ToString();
 
     }
     private void OnEnable()

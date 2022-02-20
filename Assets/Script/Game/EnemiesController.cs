@@ -202,6 +202,7 @@ public class EnemiesController : MonoBehaviour
             {
                 _missEffect[i].SetActive(true);
                 _missEffect[i].transform.SetAsLastSibling();
+                SumScore(3);
                 break;
             }
         }
@@ -217,12 +218,18 @@ public class EnemiesController : MonoBehaviour
         {
             case 0:
                 _gameSceneScontroller.MyScore += _gameSceneScontroller.GoodScore;
+                _gameSceneScontroller.GoodCount++;
                 break;
             case 1:
                 _gameSceneScontroller.MyScore += _gameSceneScontroller.GreatScore;
+                _gameSceneScontroller.GreatCount++;
                 break;
             case 2:
                 _gameSceneScontroller.MyScore += _gameSceneScontroller.PerfectScore;
+                _gameSceneScontroller.PerfectCount++;
+                break;
+            case 3:
+                _gameSceneScontroller.MissCount++;
                 break;
         }
     }

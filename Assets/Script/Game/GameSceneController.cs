@@ -28,7 +28,7 @@ public class GameSceneController : MonoBehaviour
     [SerializeField]
     private ObscuredFloat _totalTime, _life, _maxLevTime, _levTime, _initRespawnTime, _respawnTime, _respawnDivisionScale, _perfectPct, _greatPct, _plusTimeOffset, _enemyDamageOffset;
     [SerializeField]
-    private ObscuredInt _myScore, _perfectScore, _greatScore, _goodScore;
+    private ObscuredInt _myScore, _perfectScore, _greatScore, _goodScore, _perfectCnt, _greatCnt, _goodCnt, _missCnt;
 
     public float PerfectPct {
         get { return _perfectPct; }
@@ -58,6 +58,26 @@ public class GameSceneController : MonoBehaviour
     public int GoodScore {
         get { return _goodScore; }
         set { _goodScore = value; }
+    }
+
+    public int PerfectCount {
+        get { return _perfectCnt; }
+        set { _perfectCnt = value; }
+    }
+
+    public int GreatCount {
+        get { return _greatCnt; }
+        set { _greatCnt = value; }
+    }
+
+    public int GoodCount {
+        get { return _goodCnt; }
+        set { _goodCnt = value; }
+    }
+
+    public int MissCount {
+        get { return _missCnt; }
+        set { _missCnt = value; }
     }
 
     public float PlusTimeOffset {
@@ -102,9 +122,14 @@ public class GameSceneController : MonoBehaviour
         _greatPct = 0.9f;
         _myScore = 0;
         _scoreText.text = 0.ToString();//GetThousandCommaText(_myScore).ToString();
+
         _perfectScore = 100;
         _greatScore = 80;
         _goodScore = 50;
+        _perfectCnt = 0;
+        _greatCnt = 0;
+        _goodCnt = 0;
+        _missCnt = 0;
         _plusTimeOffset = 1f;
         _enemyDamageOffset = 0.05f;
 
@@ -128,6 +153,7 @@ public class GameSceneController : MonoBehaviour
             _enemiesController.StopEnemy();
             _enemiesController.AllDelEnemy();
             PopupManager.Instance.CreatePopup<GameOverPopup>(PopupManager.Popup_Type.GAMEOVER_POPUP);
+            PopupManager.Instance.GetSafePopupByType<GameOverPopup>(PopupManager.Popup_Type.GAMEOVER_POPUP).InitUI(0,0,0,0,0,0,0);
             _onceOver = true;
         }
         else if (!_isOver && !_onceOver)
